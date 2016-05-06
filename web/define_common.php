@@ -1,4 +1,4 @@
-<?php 
+<?php
     // 安全设置
     define('BUILD_DIR_SECURE',true);
     define('DIR_SECURE_FILENAME', 'index.html,index.htm');
@@ -7,3 +7,4 @@
     define('RUNTIME_PATH', 'runtime/');
     define('TMPL_PATH','view/');
     define('APP_DEBUG',true);
+    define('__PUBLIC__', '//107.170.232.130');
