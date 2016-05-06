@@ -7,5 +7,4 @@ class IndexController extends Controller {
       $this->redirect('sign_in');
     }
   }
-
 }
