@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>收银台</title>
+    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/lib/dpatch/dist/css/general-cn.css" rel="stylesheet"/>
+    <script src="/lib/angular/angular.js"></script>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>收银台</h1>
+      
+      <div>
+        <ol class="breadcrumb">
+          <li><a href="<?php echo U('/index')?>">首页</a></li>
+          <li class="active">收银台</li>
+        </ol>
+      </div>
+      
+      <div class="row">
+        <h2>购物车</h2>
+        <?php for($i=1; $i<=6; $i++) { ?>
+        <div class="col-md-2">
+          <div>物品<?php echo $i ?></div>
+          <div><img src="http://placehold.it/50x50"></div>
+          <div>价　格: {{price}}</div>
+          <div>重　量: {{weight}}</div>
+          <div>数　量: <select><option>1</option><option>2</option><option>3</option></select></div>
+          <div>来　源: <select><option>1</option><option>2</option><option>3</option></select></div>
+          <div>供应商: <select><option>1</option><option>2</option><option>3</option></select></div>
+          <div class="text-right"><a href="#">&times; 删除</a></div>
+        </div>
+
+        <?php } ?>
+      </div><!-- /item-list -->
+
+      <div class="row">
+        <h2>收件地址</h2>
+        <form class="col-md-4">
+          <input class="form-control" placeholder="收件人">
+          <input class="form-control" placeholder="联系方式(手机 或 固定电话)">
+          <select>
+            <option>国家1</option>
+            <option>国家2</option>
+            <option>国家3</option>
+          </select>
+          <select>
+            <option>省份1</option>
+            <option>省份2</option>
+            <option>省份3</option>
+          </select>
+          <select>
+            <option>城市1</option>
+            <option>城市2</option>
+            <option>城市3</option>
+          </select>
+          <input class="form-control" placeholder="邮编">
+          <input class="form-control" placeholder="地址1">
+          <input class="form-control" placeholder="地址2">
+        </form>
+      </div><!-- /address -->
+
+      <div class="row">
+        <h2>运递方案</h2>
+        <select>
+          <option>顺丰快递</option>
+          <option>中通快递</option>
+          <option>USPS</option>
+        </select>
+        <div>
+          <div class="col-md-12">{{运递时间预计}}</div>
+          <div class="col-md-12">{{运递价格}}</div>
+          <form class="col-md-4">
+          <!-- 身份证，暂时不需要的功能 -->
+          <div class="sr-only">身份证(可能需要):<input type="file" class="pull-right col-md-5"></div>
+          </form>
+
+          <!-- 运递方案详情，默认下隐藏；用户不需要知道太多详情内容 -->
+          <div class="col-md-12">{{运递方案详情}}</div>
+        </div>
+      </div><!-- /shipping-plan -->
+
+      <div class="row">
+        <div class="pull-right col-md-2">
+          <div>{{total-price-item}}</div>
+          <div>{{tax-sale}}</div>
+          <div>{{fee-shipping}}</div>
+          <div>{{total-price-final}}(~12,345 人民币)</div>
+        </div>
+        <div class="pull-right col-md-2">
+          <div>总价格:</div>
+          <div>消费税:</div>
+          <div>运　费:</div>
+          <div>结　算:</div>
+        </div>
+      </div><!-- /report-fee -->
+
+      <div class="row">
+        <div class="pull-right col-md-2">
+          <a href="<?php echo U('/payment');?>"><button class="btn btn-primary">付款</button></a>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>饭米粒 - ThinkPHP + 腾讯云 万象优图案例</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="<?php echo __ROOT__;?>/bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="<?php echo __ROOT__;?>/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="<?php echo __ROOT__;?>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <style>
+            body {font-family: '微软雅黑', Arial, san-serif;}
+            .main {margin-top: 70px;}
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">饭米粒</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+    <div class="container main">
+        <h2>客户求购提交表</h2>
+        <form class="col-md-6 col-md-offset-3" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="MAX_FILE_SIZE" value="300000" />
+            <div class="form-group">
+                <label>标题</label>
+                <input required name="request_title" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>描述</label>
+                <textarea name="request_content" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label>图片</label>
+                <input name="request_image" type="file" class="form-control" value="">
+            </div>
+            <div class="form-group">
+                <label>联系方式</label>
+                <input required name="request_contact" class="form-control">
+            </div>
+            <button class="btn btn-primary" type="submit">提交</button>
+        </form>
+        <div class="list_request col-md-12">
+        <?php if (!empty($list_request) && is_array($list_request)) { ?>
+            <?php foreach($list_request as $val) { ?>
+                <div class="col-md-3">
+                <div class="thumbnail">
+                    <img class="thumbnail-image"src="" error="this.src=http://placehold.it/240x200" width="240" height="200">
+                    <div class="caption">
+                    <h3><?php echo $val['request_title'] ?></h3>
+                    <p><?php echo $val['request_content']?></p>
+                  </div>
+                </div>
+                </div>
+            <?php } ?>
+        <?php } ?>
+        </div>
+    </div>
+    <script>
+    $(window).load(function() { 
+  $('.list_request .thumbnail-image').each(function() {
+    if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) { 
+      this.src = 'http://placehold.it/240x200'; 
+      } 
+   });
+});</script>
+    </body>
+</html> 

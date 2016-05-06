@@ -1,0 +1,66 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	padding-top: 50px;
+}
+.container {
+	position: relative;
+}
+.navbar-fixed-top {
+	border: 0 !important;
+}
+.navbar-bg {
+	background: #fff;
+}
+.navbar-header {
+	height: 50px;
+}
+.navbar-brand .icon-LOGO {
+	font-size: 24px;
+	color: #666;
+}
+.navbar-toggle {
+	position: absolute !important;
+	margin-left: 15px !important;
+}
+.navbar-toggle .icon-bar {
+	background: #000;
+}
+#navbar {
+	text-align: center;
+}
+.nav > li > a {
+	color: #000;
+}
+.carousel-control {
+	background: 0 0 !important;
+}
+
+@media (max-width: 992px) {
+	.navbar-brand {
+		position: absolute;
+		left: 50%;
+		margin-left: -55px;
+	}
+}
+@media (min-width: 992px) {
+	#navbar .navbar-nav {
+		float: none;
+		display: inline-block;
+	}
+	#navbar .keep-center {
+		margin-left: -60px;
+	}
+	#navbar .navbar-right {
+		position: absolute;
+		top: 0;
+		right: 30px;
+	}
+	#navbar .navbar-right li {
+		display: inline-block;
+	}
+	#navbar .navbar-right .nav-search {
+		padding: 13px 15px;
+		font-size: 24px;
+	}
+}

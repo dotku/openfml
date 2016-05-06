@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>支付</title>
+    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/lib/dpatch/dist/css/general-cn.css" rel="stylesheet"/>
+    <script src="/lib/angular/angular.js"></script>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>支付</h1>
+
+      <div>
+        <ol class="breadcrumb">
+          <li><a href="<?php echo U('/index')?>">首页</a></li>
+          <li><a href="<?php echo U('/checkout')?>">收银台</a></li>
+          <li class="active">支付</li>
+        </ol>
+      </div>
+      
+      <div class="row">
+        <h2>支付确认</h2>
+        <div>案例截图案例</div>
+        <div><img src="http://placehold.it/150x50"></div>
+        <form class="col-md-6">
+          <span class="col-md-3">收据截图: </span>
+          <input type="file" class="col-md-6">
+        </form>
+      </div><!-- /payment-confirm -->
+
+      <div class="row">
+        <div class="pull-right col-md-2">
+          <a href="<?php echo U('/receipt');?>"><button class="btn btn-primary">结算成功</button></a>
+        </div>
+      </div>
+
+      <div class="row">
+        <h2>收据</h2>
+        <?php for($i=1; $i<=6; $i++) { ?>
+        <div class="col-md-2">
+          <div>物品<?php echo $i ?></div>
+          <div><img src="http://placehold.it/50x50"></div>
+          <div>价　格: {{price}}</div>
+          <div>重　量: {{weight}}</div>
+          <div>数　量: {{quantity}}</div>
+          <div>来　源: {{location}}</div>
+          <div>供应商: {{vendor}}</div>
+        </div>
+
+        <?php } ?>
+      </div><!-- /item-list -->
+
+      <div class="row">
+        <h2>收件地址</h2>
+        <form class="col-md-5">
+          <div>
+            <span class="col-md-3">收件人</span>
+            <span class="col-md-9">{{收件人}}</span>
+          </div>
+          <div>
+            <span class="col-md-3">联系方式</span>
+            <span class="col-md-9">{{联系方式(手机 或 固定电话)}}</span>
+          </div>
+          <div>
+            <span class="col-md-3">所在地</span>
+            <span class="col-md-9">{{国家}} {{省份}} {{城市}}</span>
+          </div>
+          <div>
+            <span class="col-md-3">邮编</span>
+            <span class="col-md-9"> {{邮编}}</span>
+          </div>
+          <div>
+            <span class="col-md-3">地址1</span>
+            <span class="col-md-9">{{地址1}}</span>
+          </div>
+          <div>
+            <span class="col-md-3">地址2</span>
+            <span class="col-md-9">{{地址2}}</span>
+          </div>
+        </form>
+      </div><!-- /address -->
+
+      <div class="row">
+        <h2>运递方案</h2>
+        <div>运递方案: {{运递方案}}</div>
+        <div>
+          <div class="col-md-12">{{运递时间预计}}</div>
+          <div class="col-md-12">{{运递价格}}</div>
+        </div>
+      </div><!-- /shipping-plan -->
+
+      <div class="row">
+        <div class="pull-right col-md-2">
+          <div>{{total-price-item}}</div>
+          <div>{{tax-sale}}</div>
+          <div>{{fee-shipping}}</div>
+          <div>{{total-price-final}}(~12,345 人民币)</div>
+        </div>
+        <div class="pull-right col-md-2">
+          <div>总价格:</div>
+          <div>消费税:</div>
+          <div>运　费:</div>
+          <div>结　算:</div>
+        </div>
+      </div><!-- /report-fee -->
+
+      
+
+    </div>
+  </body>
+</html>
