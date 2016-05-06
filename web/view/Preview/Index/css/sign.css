@@ -1,0 +1,122 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	background: url(../images/bg/1.jpg) no-repeat;
+}
+.form-signig {
+	max-width: 380px;
+	margin: 20% auto;
+	padding: 50px;
+	-webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(255,255,255,.6);
+}
+.form-signig h2 {
+	margin: 0 0 20px 0;
+	font: bold 20px '微软雅黑','Helvetica Neue',sans-serif,SimHei;
+	text-align: center;
+}
+.form-signig .wrap {
+	position: relative;
+	margin-bottom: 10px;
+}
+.form-signig .wrap > span {
+	position: absolute;
+	width: 2.6em;
+	padding-top: 8px;
+	text-align: center;
+	opacity: .5;
+}
+.form-signig .form-control {
+	padding-left: 3em;
+	background: rgba(255,255,255,.5);
+    border: none;
+}
+.form-signig .wrap .checkbox {
+	display: inline-block;
+	margin: 0;
+}
+.form-signig .checkbox input[type="checkbox"] {
+	margin: 0;
+	opacity: 0;
+}
+.form-signig .checkbox label {
+	display: block;
+	font: normal 1em '微软雅黑','Helvetica Neue',sans-serif,SimHei;
+	color: rgba(0,0,0,.6);
+	line-height: 1em;
+	transition: color .2s ease;
+}
+.form-signig .checkbox label:hover, .form-signig .wrap a:hover {
+	color: rgba(0,0,0,.8);
+}
+.form-signig .checkbox label:before {
+	position: absolute;
+    top: 0;
+    line-height: 1;
+    width: 1em;
+    height: 1em;
+    left: 0;
+    content: '';
+    border-radius: 4px;
+    background: #FFF;
+    -webkit-transition: background-color .3s ease,-webkit-box-shadow .3s ease;
+    -moz-transition: background-color .3s ease,box-shadow .3s ease;
+    transition: background-color .3s ease,box-shadow .3s ease;
+    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,.2);
+    box-shadow: 0 0 0 1px rgba(0,0,0,.2);
+}
+.form-signig .checkbox label:after {
+	-ms-filter: "alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
+    content: '';
+    position: absolute;
+    background: 0 0;
+    border: .2em solid #333;
+    border-top: none;
+    border-right: none;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    top: .275em;
+    left: .25em;
+    width: .6em;
+    height: .3em;
+}
+.form-signig .wrap a {
+	position: absolute;
+	top: 0;
+	right: 0;
+	color: rgba(0,0,0,.6);
+	font: normal 1em '微软雅黑','Helvetica Neue',sans-serif,SimHei;
+	text-decoration: none;
+	transition: color .2s ease;
+}
+.form-signig .wrap button {
+	width: 280px;
+    height: 38px;
+	margin-top: 6px;
+    border: none;
+    background-color: #323a45;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: opacity .2s ease;
+}
+.form-signig .wrap button:hover {
+	opacity: .9;
+}
+.form-signig .register {
+	display: block;
+	text-align: center;
+	color: rgba(0,0,0,.6);
+	text-decoration: none;
+    transition: color .2s ease;
+}
+.form-signig .register:hover { 
+	color: rgba(0,0,0,.8);
+}

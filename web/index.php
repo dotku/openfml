@@ -1,25 +1,14 @@
-<?php
-
-require('../vendor/autoload.php');
-
-$app = new Silex\Application();
-$app['debug'] = true;
-
-// Register the monolog logging service
-$app->register(new Silex\Provider\MonologServiceProvider(), array(
-  'monolog.logfile' => 'php://stderr',
-));
-
-// Register view rendering
-$app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path' => __DIR__.'/views',
-));
-
-// Our web handlers
-
-$app->get('/', function() use($app) {
-  $app['monolog']->addDebug('logging output.');
-  return $app['twig']->render('index.twig');
-});
-
-$app->run();
+<?php 
+    /*
+    * config_local.php                用于设置代码所在的环境
+    * define()                        一般都是固定的设置，必须在 ThinkPHP 运行前设置好
+    * $config['lib_thinkphp']         ThinkPHP 的核心文件
+    */
+    require_once 'config_local.php';
+    require_once 'define_common.php';
+    
+    // define('BIND_MODULE', 'Home');
+    // define('BUILD_CONTROLLER_LIST', 'Index,Brand,Calc,Goods,Log,FAQ,Plan,Quote,Rank,Request');
+    // define('BIND_CONTROLLER', 'Index');
+    
+    require_once $config_local['lib_thinkphp'];

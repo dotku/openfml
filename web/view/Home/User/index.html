@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>用户管理后台</title>
+    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/lib/dpatch/dist/css/general-cn.css" rel="stylesheet"/>
+    <script src="/lib/angular/angular.js"></script>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>用户管理后台</h1>
+      
+      <div>
+        <ol class="breadcrumb">
+          <li><a href="<?php echo U('/index')?>">Home</a></li>
+          <li class="active">User</li>
+        </ol>
+      </div>
+
+      <div class="col-md-3">
+        <ul>
+          <li><a href="<?php echo U('/User/account'); ?>">我的账户</a></li>
+          <li><a href="<?php echo U('/User/receipt'); ?>">我的订单</a></li>
+          <li><a href="<?php echo U('/User/addressbook'); ?>">我的地址簿</a></li>
+          <li><a href="<?php echo U('/agent'); ?>">代购者后台</a></li>
+          <li><a href="<?php echo U('/vendor'); ?>">供应商后台</a></li>
+        </ul>
+      </div><!-- /nav -->
+      
+      <div class="col-md-9">
+        <div>
+          <h2>基本资料</h2>
+          <div>账户 {{username}}</div>
+          <div>余额 {{credit}} <a href="<?php echo U('/User/add-value'); ?>">充值</a></div>
+          <div>邮箱 {{email}} <a href="<?php echo U('/User/reset-password'); ?>">重置邮箱</a></div>
+          <div><a href="<?php echo U('/User/reset-password'); ?>">重置密码</a></div>
+
+        </div>
+
+        <div>
+          <h2>我的订单</h2>
+
+          <div class="clearfix">
+            <div class="col-md-6 pull-right">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">订单查询</button>
+                </span>
+              </div><!-- /input-group -->
+            </div>
+          </div>
+
+          <div>订单1</div>
+          <div>订单2</div>
+          <div>订单3</div>
+        </div>
+
+        <div>
+          <h2>我的地址簿</h2>
+
+          <div class="clearfix">
+            <div class="col-md-6 pull-right">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">地址查询</button>
+                </span>
+              </div><!-- /input-group -->
+            </div>
+          </div>
+
+          <div>地址1</div>
+          <div>地址2</div>
+          <div>地址3</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
