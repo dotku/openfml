@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>收据</title>
+    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/lib/dpatch/dist/css/general-cn.css" rel="stylesheet"/>
+    <script src="/lib/angular/angular.js"></script>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>收据</h1>
+
+      <div>
+        <ol class="breadcrumb">
+          <li><a href="<?php echo U('/index')?>">首页</a></li>
+          <li><a href="<?php echo U('/checkout')?>">收银台</a></li>
+          <li class="active">收据</li>
+        </ol>
+      </div>
+
+      <div>收据编码: xxx12345</div>
+      <div>时间: xxxx/xx/xx xx:xx:xx</div>
+      <div>目前状态: {{record_status}}</div>
+      <div>收据详情: {{receipt_detail}}</div>
+      <p>您可以通过首页的搜索框输入收据编码来查询运送状态</p>
+      <div><img src="http://placehold.it/250x150"></div>
+
+      <h2>其他链接</h2>
+      <ul>
+        <li><a href="<?php echo U('/index');?>">回首页</a></li>
+        <li><a href="<?php echo U('/follow');?>">跟单系统</a></li>
+      </ul>
+    </div>
+  </body>
+</html>

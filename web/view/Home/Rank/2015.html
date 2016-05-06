@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>2015 品牌排行榜</title>
+    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/lib/dotku/dist/css/general-cn.css" rel="stylesheet"/>
+    <script src="/lib/angular/angular.js"></script>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>2015 品牌排行榜</h1>
+        <?php for ($i = 0; $i < 4; $i++) { ?>
+            <div class="col-md-12 text-center" style="padding: 10px;"><img src="<?php echo $i ?>.png"></div>
+        <?php } ?>
+        <a href="BGB2015-report.pdf">download 下载</a>
+         <footer class="footer">
+            &copy; 2016 范米粒(fnmili.com)
+         </footer>
+    </div>
+  </body>
+</html>

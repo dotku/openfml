@@ -1,0 +1,69 @@
+<style>
+body {font-size: 12px;}
+.item-title {font-size: 12px;}
+.item-title-main {font-size: 14px;}
+</style>
+<?php $status_key = "待邮寄"; ?>
+<?php if (in_array($status_key, $array_status_name)) { ?>
+  
+  <div class="row title">
+    <div class="col-xs-2 state">
+      <?php echo $status_key; ?>
+    </div>
+      <!--div class="col-md-10 col-xs-10 state2">订单号：<a href="#">160218415102313</a> <span class="hidden-xs">下单时间：</span>2016-02-18 16:40:06</div-->
+  </div><!--/title-->
+
+  <div class="">
+
+  <?php $total_price = 0; ?>
+  <?php $total_shpping_fee = 0; ?>
+
+  <?php foreach($output['entry'] as $key => $val) { ?>
+    <?php if($val['status_name'] == $status_key) { ?>
+      <div class="">
+        <div class="pro-wrap clearfix">
+          <!--a href="#"><img height="80" src="<?php echo $gearGoods->getImageURL($val['goods_id']); ?>"/></a-->
+          <h2 class="item-title">
+            <a href="#"><span 
+              class="item-title-main"><?php 
+              echo $val['goods_name_cn']?></span><br/><?php echo $val['goods_name']?></a>
+          </h2>
+          <div class="">价格: $ <?php echo number_format($val['goods_unit_price'], 2) ?></div>
+          <div class="">重量: <?php echo number_format($val['goods_unit_weight'], 2) ?> lb.</div>
+          <div class="">个数: <?php echo $val['goods_number'] ?></div>
+          <div class="">分类: <?php echo $val['category_name_cn'] ?></div>
+          <div class=" pull-right">
+          $ <?php echo number_format($val['goods_unit_price'] * $val['goods_number'], 2) ?>
+          </div>
+        </div>
+      </div>
+      <?php $total_price += ($val['goods_number'] * $val['goods_unit_price']) * (1+ $val['tax_rate']); ?>
+      <?php $total_weight += $val['goods_number'] * $val['goods_unit_weight']; ?>
+      <?php $total_shipping_fee += $val['shipping_fee_rate'] * $val['goods_unit_weight']; ?>
+    <?php } ?>
+  <?php } ?>
+  <?php $total_shipping_fee += 3; ?>
+  <?php $total = number_format($total_price, 2); ?>
+  <div class="col-md-3 col-xs-3 pull-right container">
+    <div class="visible-xs ">总价: <span class="total"><?php echo $total_price ?> 美元</span></div>
+    <div class="hidden-xs">总价: <span class="total"><?php echo $total_price ?> 美元</span></div>
+    <div class="visible-xs">合重: <span class="total"><?php echo $total_weight ?> 磅</span></div>
+    <div class="hidden-xs">合重: <span class="total"><?php echo $total_weight ?> 磅</span></div>
+    <div class="visible-xs">运费: <span class="total"><?php echo $total_shipping_fee ?> 美元</span></div>
+    <div class="hidden-xs">运费: <span class="total"><?php echo $total_shipping_fee ?> 美元</span></div>
+    <?php $exchange_shipping = ($total_shipping_fee) * R('Gear/Finance/getRate'); ?>
+    <div class="visible-xs">运费约合: <span class="total"><?php echo number_format($exchange_shipping, 2) ?> 人民币</span></div>
+    <div class="hidden-xs">运费约合: <span class="total"><?php echo number_format($exchange_shipping, 2) ?> 人民币</span></div>
+    <div class="visible-xs">合计: <span class="total"><?php echo $total_weight+$total_price ?> 美元</span></div>
+    <div class="hidden-xs">合计: <span class="total"><?php echo $total_weight+$total_price ?> 美元</span></div>
+    <?php $exchange_final = ($total_weight+$total_price) * R('Gear/Finance/getRate'); ?>
+    <div class="">合计约合: <span class="total"><?php echo number_format($exchange_final, 2); ?> 人民币</span></div>
+    <div style="color:red">* 汇率 1 美元 = <?php echo R('Gear/Finance/getRate');?> 人民币</div>
+    <div class="text-right">
+    <a href="https://item.taobao.com/item.htm?spm=686.1000925.0.0.cGLuG5&id=526279530562"
+      class="btn btn-danger" style="margin-top:20px">结算</a>
+    </div>
+  </div>
+
+  </div><!--/content-->
+<?php } ?>
