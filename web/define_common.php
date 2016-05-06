@@ -7,4 +7,4 @@
     define('RUNTIME_PATH', 'runtime/');
     define('TMPL_PATH','view/');
     define('APP_DEBUG',true);
-    define('__PUBLIC__', '//dazzling-torch-6575.firebaseapp.com');
+    define('__PUBLIC__', '/lib');
