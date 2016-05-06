@@ -1,0 +1,6 @@
+<div class="clearfix list-brand" ng-controller="brandCtrl">
+  <h2>Brands 品牌</h2>
+  <div class="col-xs-6 col-md-2" ng-repeat="x in brand | orderBy:'display'">
+    <a href="<?php echo U('/Home/Brand'); ?>/{{x.name}}">{{x.display}}</a> 
+  </div>
+</div>

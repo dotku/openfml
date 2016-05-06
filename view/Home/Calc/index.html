@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>计算器</title>
+    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/lib/dotku/dist/css/general-cn.css" rel="stylesheet"/>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/jquery-1.12.0/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>计算器</h1>
+      <p>这里只是以一般产品的计算公式，具体的计算，见<a href="/index.php#fee">首页费用一栏</a>。</p>
+      <div class="clearfix">
+      <form class="col-md-4">
+        <div class="input-group">
+            <label class="input-group-addon">价格</label>
+            <input name="price" value="20" class="form-control input-value"/>
+            <span class="input-group-addon">美元</span>
+        </div>
+        <div class="input-group">
+            <label class="input-group-addon">重量</label>
+            <input name="weight" value="2" class="form-control input-value"/>
+            <span class="input-group-addon">磅数</span>
+        </div>
+      </form>
+      </div>
+      <h2>估价</h2>
+      <div class="calc-total"></div>
+      <h2>说明</h2>
+      <ul>
+        <li>116.5% 是原价格(100%) + 税收 (9.5%) + 服务费 (7%) 的百分比总和</li>
+        <li>7 是一般产品的邮递价格费率，食物、玩具等可以更低至 4.5/lb</li>
+      </ul>
+    </div>
+    <script>
+        $(function(){
+            getResult();
+            $(".input-value").on('keyup', function(){
+                getResult();
+            });
+            function getResult() {
+                var numPrice = $("input[name=price]").val();
+                var numWeight = $("input[name=weight]").val();
+                var sResult = numPrice + ' x 116.5% + ' 
+                    + numWeight + ' x 7' 
+                    + ' = <span class="label label-primary" style="font-size: 30px">' + computeTotal(numPrice, numWeight) + '</span> 美元';
+                $(".calc-total").html(sResult);
+            }
+            function computeTotal(price, weight) {
+                return price * 116.5 / 100 + weight * 7;
+            }
+        });
+    </script>
+  </body>
+</html>

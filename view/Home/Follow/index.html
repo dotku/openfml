@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>跟单系统</title>
+    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/lib/dpatch/dist/css/general-cn.css" rel="stylesheet"/>
+    <script src="/lib/angular/angular.js"></script>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>跟单系统</h1>
+      
+      <div>
+        <ol class="breadcrumb">
+          <li><a href="<?php echo U('/index')?>">首页</a></li>
+          <li class="active">跟单系统</li>
+        </ol>
+      </div>
+
+      <div class="input-group">
+        <input class="form-control" placeholder="请输入订单号: eg. xxx12345">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">搜索</button>
+        </span>
+      </div>
+
+      <h2>订单状态详情</h2>
+      <div>收据编码: xxx12345</div>
+      <div>时间: xxxx/xx/xx xx:xx:xx</div>
+      <div>目前状态: {{record_status}}</div>
+      <div>收据详情: {{receipt_detail}}</div>
+      <div>运单号: <a href="#" title="快递官网查询">{{shipping_number}}</a></div>
+      
+      <div class="feedback clearfix">
+        <h2>留言与反馈</h2>
+        <form class="col-md-5">
+        <div><textarea class="form-control"></textarea></div>
+        <div><input type="submit" value="提交" class="btn btn-default pull-right"></div>
+        </form>
+      </div>
+
+      <h2>温馨提示</h2>
+      <ul>
+        <li>
+          <p>您可以通过首页的搜索框输入收据编码来查询运送状态</p>
+          <div><img src="http://placehold.it/250x150"></div>
+        </li>
+        <li>
+          <p>点击运单号链接，进入快递官网查询运送信息</p>
+        </li>
+        <li>
+          <p><a href="<?php echo U('/User/Register');?>"><button class="btn">注册</button></a> 成为会员，进入会员系统页面即可跟单。</p>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

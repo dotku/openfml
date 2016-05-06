@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>求购清单 - 范米粒(Fnmili.com)</title>
+    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/lib/dotku/dist/css/general-cn.css" rel="stylesheet"/>
+    <script src="/lib/angular/angular.js"></script>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+  </head>
+  <body ng-app="myApp" ng-controller="myCtrl">
+    <div class="container">
+      <h1>求购清单</h1>
+      <div class="media" ng-repeat="x in goods">
+        <div class="media-left col-xs-6 col-md-3">
+          <a href="{{x.goods_url || '#unkown'}}" class="thumbnail">
+            <img class="media-object" ng-src="{{x.goods_img}}" alt="{{x.goods_name}}">
+          </a>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading">{{x.goods_name}}</h4>
+          <div class="media-price">${{x.goods_price}}</div>
+          <div class="media-description">{{x.goods_description}}</div>
+        </div>
+      </div>
+    </div>
+    <script>
+      angular.module('myApp', [])
+      .controller('myCtrl', function($scope, $http){
+        $http.get('./data.js')
+        .then(function(rsp){
+          $scope.goods = rsp.data;
+          console.log();
+          
+        });
+      })
+    </script>
+  </body>
+</html>

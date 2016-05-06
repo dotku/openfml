@@ -1,0 +1,84 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	background: #dbdbdb;
+}
+.marketing {
+	height: 100%;
+    padding-top: 20%;
+    padding-bottom: 10%;
+	text-align: center;
+}
+.marketing .logo {
+	position: absolute;
+    top: 38px;
+    left: 40px;
+}
+.marketing .logo img {
+	width: 190px;
+}
+.marketing p {
+	margin-bottom: 20px;
+}
+.marketing .country {
+	position: relative;
+	left: -20px;
+}
+.marketing .country lable {
+	display: inline-block;
+	margin-bottom: 6px;
+	padding-left: 10px;
+	color: #808080;
+	cursor: pointer;
+}
+.marketing .country .ok {
+	display: inline-block;
+	width: 24px;
+}
+.marketing .country span:hover {
+	color: #666;
+}
+.marketing .footer {
+	margin-top: 40px;
+}
+.marketing .footer .wrap {
+	width: 60px;
+	height: 60px;
+	margin: 0 auto;
+	padding-top: 18px;
+	border-radius: 50%;
+	border: 1px solid #666;
+	cursor: pointer;
+}
+.marketing .footer .wrap:hover {
+	background: #666;
+	color: #fff;
+}
+.marketing .footer span {
+	font-weight: bold;
+}
+.marketing .footer .glyphicon-ok {
+	display: block;
+	margin-top: 6px;
+	padding-bottom: 4px;
+}
+
+@media (max-width: 992px) {	
+	.marketing {
+		position: relative;
+		height: 100%;
+		padding-top: 55%;
+		padding-bottom: 10%;
+	}
+	.marketing .logo {
+		position: absolute;
+		width: 100%;
+		top: 70px;
+		left: 0;
+	}
+	.marketing .logo img {
+		display: block;
+		margin: 0 auto;
+		width: 30%;
+	}
+}
