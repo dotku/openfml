@@ -12,7 +12,13 @@
   </head>
   <body>
     <div class="container">
-      <h1>用户管理后台</h1>
+      <h1>用户</h1>
+      <?php
+        $model_user = D('user');
+        $list_user = $model_user->order('uid desc')->select();
+        echo count($list_user);
+        var_dump($list_user);
+      ?>
     </div>
   </body>
 </html>
