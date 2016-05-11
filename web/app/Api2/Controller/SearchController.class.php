@@ -7,7 +7,7 @@ class SearchController extends Controller {
     }
     public function bestbuy() {
         // key: mv4ragc2ke4rm3fgsm3p97r7
-        $apiKey = 'mv4ragc2ke4rm3fgsm3p97r7';
+        $apiKey = '';
         $q = split(' ', $_GET['q']);
         foreach ($q as $k => $v) {
             $q[$k] = 'search=' . $v;
@@ -20,10 +20,10 @@ class SearchController extends Controller {
     public function amazon() {
     
     // Your AWS Access Key ID, as taken from the AWS Your Account page
-    $aws_access_key_id = "AKIAI3ETQLUIPHZMRHNQ";
+    $aws_access_key_id = "";
 
     // Your AWS Secret Key corresponding to the above ID, as taken from the AWS Your Account page
-    $aws_secret_key = "VUxjtQEVF+x1SktYTvMVivglzLN+Zd0Rnk2xKePU";
+    $aws_secret_key = "";
 
     // The region you are interested in
     $endpoint = "webservices.amazon.com";
@@ -33,7 +33,7 @@ class SearchController extends Controller {
     $params = array(
         "Service" => "AWSECommerceService",
         "Operation" => "ItemSearch",
-        "AWSAccessKeyId" => "AKIAI3ETQLUIPHZMRHNQ",
+        "AWSAccessKeyId" => "",
         "AssociateTag" => "soeasy-20",
         "SearchIndex" => "All",
         "Keywords" => "shoe",
