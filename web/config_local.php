@@ -1,15 +1,14 @@
 <?php 
-
 /*
 * 由于服务器环境，开发环境，各有不同，本文件用于本地环境的配置搭建；
 * 本文件将会被 /index.php 和 /Common/Conf/config.php 文件同时引用
 */
 $config_local = array(
     // SITE
-    'site_title' => '范米粒',
+    'site_title'    => '范米粒',
     'site_subtitle' => '一个基于 ThinkPHP 的开源免费电商系统',
     // library
-    'lib_thinkphp' => '../framework/thinkphp/3.2.3/ThinkPHP.php',
+    'lib_thinkphp'  => '../framework/thinkphp/3.2.3/ThinkPHP.php',
     /*
     hostname: 10.9.1.188
     jdbcUrl: jdbc:mysql://10.9.1.188:3306/cf_3a0c73e9_e71c_46eb_8dce_b09350405800?user=zyMN5R9FebiJKxWS&password=JHyknPfY0Q8FmBKs

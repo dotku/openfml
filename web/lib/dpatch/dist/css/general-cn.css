@@ -1,0 +1,5 @@
+@charset "utf-8";
+body, html { font-family: '微软雅黑', Arial, sans-serif;}
+article {max-width: 800px;}
+.container { max-width: 1000px; }
+.content {max-width: 800px;}

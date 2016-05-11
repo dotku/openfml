@@ -5,6 +5,7 @@ function fnmili_json_decode($requestURL, $data) {
         $requestURL = $requestURL . '?' . http_build_query($data);
     }
     return json_decode(file_get_contents($requestURL), true);
+
 }
 function is_mobile() {
     $useragent=$_SERVER['HTTP_USER_AGENT'];
