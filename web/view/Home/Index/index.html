@@ -4,15 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
     <title><?php echo C('SITE_TITLE');?>(fnmili.com) - <?php echo C('site_subtitle');?></title>
-    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="/lib/dpatch/dist/css/general-cn.css" rel="stylesheet"/>
-    <script src="/lib/angular/angular.js"></script>
-    <script src="/lib/jquery/dist/jquery.min.js"></script>
-    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <link href="<?php echo __PUBLIC__ ?>/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="<?php echo __PUBLIC__ ?>/lib/dpatch/dist/css/general-cn.css" rel="stylesheet"/>
+    <script src="<?php echo __PUBLIC__ ?>/lib/angular/angular.js"></script>
+    <script src="<?php echo __PUBLIC__ ?>/lib/jquery/dist/jquery.min.js"></script>
+    <script src="<?php echo __PUBLIC__ ?>/lib/bootstrap/dist/js/bootstrap.min.js"></script>
   </head>
   <body ng-app="indexApp">
     <div class="container">
-      
+
       <?php include T('div-header'); ?>
 
       <ol class="breadcrumb">
