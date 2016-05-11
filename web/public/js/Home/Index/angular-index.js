@@ -11,4 +11,12 @@ var indexApp = angular.module('indexApp', [])
         console.log('brandApp request failed');
         console.log(rsp);
     });
+}]).controller('featuredCtrl',['$scope','$http',function($scope,$http){
+    $http.get(__ROOT__ + '/index.php/Api2/goods').success(function(data){
+        $scope.goods = data.data;
+    });
+}]).controller('cateCtrl',['$scope','$http',function($scope,$http){
+    $http.get(__ROOT__ + '/index.php/Api2/goods_cate').success(function(data){
+        $scope.cate = data.data;
+    });
 }]);
