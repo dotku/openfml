@@ -2,7 +2,7 @@
   <h2>Cate <?php echo $i+1 ?></h2>
     <div class="row"> 
       <div class="col-xs-6 col-md-3" ng-repeat="x in goods | orderBy:'id'"> 
-        <a href="<?php echo U('/product/detail'); ?>" class="thumbnail"> 
+        <a href="<?php echo U('/Home/product/detail'); ?>?id={{x.id}}" class="thumbnail"> 
           <img ng-src="{{x.image_file}}" 
             style="height: 180px; width: 100%; display: block;"> 
         </a> 

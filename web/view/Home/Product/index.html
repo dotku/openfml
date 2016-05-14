@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
@@ -10,7 +10,7 @@
     <script src="/lib/jquery/dist/jquery.min.js"></script>
     <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
   </head>
-  <body>
+  <body ng-controller="Aaa">
     <div class="container">
       
       <?php include T('index/div-header'); ?>
@@ -21,7 +21,13 @@
       </ol>
 
       <?php include T('index/div-main'); ?>
-
+      <script>
+    var m1 = angular.module('myApp',[]);
+    m1.controller('Aaa',['$location',function($location){
+      //$location.search().id;
+      console.log($location.search().id);
+    }]);
+  </script>
     </div>
   </body>
 </html>
