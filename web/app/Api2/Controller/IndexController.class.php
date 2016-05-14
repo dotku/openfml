@@ -20,19 +20,32 @@ class IndexController extends Controller {
                     break;
                 default:
                     $model = D($_GET['table']);
-                    $list = $model->select();
-                    if (is_array($list) && !empty($list)) {
-                        $output['data'] = $list;
-                        $output['status_code'] = 1;
+                    //var_dump($_GET['id']);
+                    if ($_GET['id']) {
+                        $map['id'] = intval($_GET['id']);
+                        $info = $model->where($map)->find();
+                        if ($info) {
+                            $output['data'] = $info;
+                            $output['status_code'] = 1;
+                        } else {
+                            $output['data'] = 'Either null or empty.';
+                            $output['status_code'] = -1;
+                        }
                     } else {
-                        $output['data'] = 'Either null or empty.';
-                        $output['status_code'] = -1;
+                        $list = $model->select();
+                        if (is_array($list) && !empty($list)) {
+                            $output['data'] = $list;
+                            $output['status_code'] = 1;
+                        } else {
+                            $output['data'] = 'Either null or empty.';
+                            $output['status_code'] = -1;
+                        }
                     }
                     echo json_encode($output);
             }
 
         } else {
-            var_dump(in_array($_GET['table'], $white_list));
+            //var_dump(in_array($_GET['table'], $white_list));
             echo 'Hello, Welcome to API 2!';
         }
 

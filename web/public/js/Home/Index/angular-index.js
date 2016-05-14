@@ -11,6 +11,7 @@ var indexApp = angular.module('indexApp', [])
         console.log('brandApp request failed');
         console.log(rsp);
     });
+
 }]).controller('featuredCtrl',['$scope','$http',function($scope,$http){
     $http.get(__ROOT__ + '/index.php/Api2/goods').success(function(data){
         $scope.goods = data.data;
