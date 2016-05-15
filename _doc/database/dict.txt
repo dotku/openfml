@@ -1,0 +1,11 @@
+cart 购物车
+cart_entry 购物车_订单 关系表
+entry 单笔订单记录
+goods 产品
+goods_brand 产品品牌
+goods_cate 产品类别
+receipt_box 订单（收据）箱/包裹（一个订单，可能会有多个包裹）
+receipt_order 收据订单
+receipt_receiver 收据接收人
+status_entry 订单状态
+user 用户

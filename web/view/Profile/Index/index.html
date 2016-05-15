@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>范米粒</title>
+<link rel="stylesheet" type="text/css" href="<?php echo __PUB__; ?>/css/bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __PUB__; ?>/css/style.css"/>
+
+<style>
+/* 暂时处理 */
+.nickname {font-size: 20px;}
+.footer {line-height: 40px; background-color: inherit; position: fixed; bottom: 10px;}
+.main-container{max-width: 1000px;}
+.order-main .line {line-height: 16px}
+</style>
+</head>
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="<?php echo U('/Home')?>"><span 
+        class="icon-logo hidden-xs"></span><span 
+        class="icon-LOGO"></span></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse navbar-right">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo R('Gear/User/getDisplayName'); ?>
+              (ID: <?php echo R('Gear/User/getUserID'); ?>)<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="<?php echo U('User/profile'); ?>">个人资料</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="<?php echo U('/Access/logout'); ?>">退出</a></li>
+          </ul>
+        </li>
+
+      </ul>
+
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+<div class="container-fluid main-container">
+	<div class="row">
+		<div class="col-sm-3 col-md-2 sidebar hidden-xs">
+      <div><i class="glyphicon glyphicon-user account-icon"></i> 用户资料</div>
+      <div class="nickname"><?php echo $_SESSION['user']['nickname'] ?></div>
+      <div>| 用户名: <?php echo $_SESSION['user']['username'] ?></div>
+      <div>| 用户ID: <?php echo $_SESSION['user']['id'] ?></div>
+      <div>| 默认地址: <br/><?php echo $_SESSION['user']['address']; ?></div>
+      <div>| 默认手机: <br/><?php echo $_SESSION['user']['telephone']; ?></div>
+      <!--
+			<ul class="nav nav-sidebar">
+				<li>
+					<a href="#">购物车</a>
+				</li>
+				<li>
+					<a href="#">订单历史</a>
+				</li>
+			</ul>
+      -->
+      <footer class="footer">&copy; 2016 Fnmili 范米粒</footer>
+		</div>
+		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 order-main">
+
+      <?php $gearGoods = A('Gear/Goods'); ?>
+      <?php $array_status_name = array_column($output['entry'], 'status_name') ?>
+      
+      <?php if (is_array($output['entry']) && !empty($output['entry'])) { ?>
+        <?php include_once T('order_2_pendding'); ?>
+      <?php } else { ?>
+        <div class="row title text-center">无订单信息</div>
+      <?php } ?>
+		</div>
+	</div>
+  
+</div>
+
+<script type="text/javascript" src="<?php echo __PUB__; ?>/js/jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src="<?php echo __PUB__; ?>/js/bootstrap.js"></script>
+<script type="text/javascript" src="<?php echo __PUB__; ?>/js/js.js"></script>
+</body>
+</html>

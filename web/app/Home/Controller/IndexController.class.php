@@ -10,7 +10,7 @@ class IndexController extends Controller {
   
   public function order(){
     $model_order = D('receipt_order');
-    $model_entry = D('receipt_entry');
+    $model_entry = D('entry');
 
     $map_order['uid'] = $_SESSION['user']['id'];
     $map_entry['order_id'] = '';
