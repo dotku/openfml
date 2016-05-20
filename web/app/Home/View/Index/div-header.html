@@ -1,0 +1,40 @@
+<?php 
+  $q = $_GET['q'] ? $_GET['q'] : '';
+?>
+<div class="clearfix header">
+  <div class="col-md-3 col-xs-6">
+    <h1><?php echo C('SITE_TITLE');?></h1>
+  </div>
+  
+  <div class="search-bar col-md-6 col-xs-6"
+    style="display:flex; align-items: center;justify-content: center; height:69px">
+    
+    <form action="<?php echo U('/search'); ?>">
+    <div class="input-group">
+      
+      <input type="text" class="form-control" name="q" placeholder="Search for..."
+        value="<?php echo $q; ?>">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">搜索</button>
+      </span>
+      
+    </div><!-- /input-group -->
+    </form>
+
+  </div>
+  
+  <div class="col-md-3 text-right"
+    style="display:flex; align-items: center;justify-content: center; height:69px">
+      <a href="<?php echo U('/Home/checkout'); ?>">
+        <button class="btn btn-primary" type="button">
+        购物车 <span class="badge" id="cart-num">3</span>
+        </button>
+      </a>
+
+      <a href="<?php echo U('/Profile'); ?>"><button class="btn btn-primary" type="button">
+        <i class="glyphicon glyphicon-user"></i>
+      </button></a>
+  </div>
+
+</div><!-- header -->
+

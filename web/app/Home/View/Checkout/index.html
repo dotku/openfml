@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>收银台</title>
+    <link href="<?php echo __ROOT__ ?>/public/css/base.css" rel="stylesheet"/>
+    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/lib/dpatch/dist/css/general-cn.css" rel="stylesheet"/>
+    <script src="/lib/angular/angular.js"></script>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+  </head>
+  <body ng-app="checkoutApp">
+    <div class="container">
+      
+      <div class="clearfix">
+        <h1 class="col-md-6" style="">收银台</h1>
+        <div class="col-md-6 form-search">
+          <form class="form-inline pull-right"
+            style="display:flex; align-items: center; height: 65px">
+            <div class="input-group">
+            <input class="form-control">
+            <div class="input-group-btn">
+              <button type="submit" class="btn btn-default">搜索</button>
+            </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      <div>
+        <ol class="breadcrumb">
+          <li><a href="<?php echo U('/Home/Index')?>">首页</a></li>
+          <li class="active">收银台</li>
+        </ol>
+      </div>
+      
+      <div class="container" ng-controller="cartCtrl">
+        <h2>购物车</h2>
+        <div class="col-md-4 col-xs-12" ng-show="!goods.length">
+          <div class="thumbnail">车内无任何物品</div>
+        </div>
+
+        <div class="item-block col-md-4 col-xs-12" 
+          ng-repeat="g in goods">
+          <div class="thumbnail clearfix">
+            <div><img ng-src="{{g.image_file}}" width="100%"></div>
+            <div class="container">
+              <div class="lead"><h3>{{g.goods_name | number:2}}</h3></div>
+              <div>价　格: <span>{{g.unit_price | number:2}}</span> USD</div>
+              <div>重　量: <span>{{g.unit_weight | number:2}}</span> 磅</div>
+              <div>数　量: <input 
+                name="quantity" 
+                value="1" 
+                size="4"
+                type="number"
+                max="100"
+                ng-model="g.quantity"
+                style="border-radius: 4px; border: 1px solid #ccc; text-align: center; max-width: 50px"
+                ng-change="updateReport($index)"></div>
+              <!-- div>来　源: <select><option>1</option><option>2</option><option>3</option></select></div>
+              <div>供应商: <select><option>1</option><option>2</option><option>3</option></select></div-->
+            </div>
+            <div class="pull-right">
+              <button class="btn btn-xs btn-danger" 
+                ng-click="item_remove($index)">
+                &times; 删除
+              </button>
+            </div>
+          </div>
+        </div>
+      </div><!-- /item-list -->
+
+      <div class="container">
+        <h2>收件地址</h2>
+        <div class="col-md-8">
+          <input class="form-control" placeholder="收件人">
+          <input class="form-control" placeholder="联系方式 (手机 或 固定电话)">
+          <input class="form-control" value="中国 (现仅面向中国)" readonly>
+          <input class="form-control" placeholder="省份直辖市, eg 福建省" name="area_level_1">
+          <input class="form-control" placeholder="城市市, eg 福州市" name="area_level_2">
+          <input class="form-control" placeholder="区县乡街道地址" name="address_street">
+          <input class="form-control" placeholder="邮编" name="zipcode">
+        </div>
+      </div><!-- /address -->
+
+      <div class="container" ng-controller="shippingCtrl">
+        <h2>运递方案</h2>
+        <div class="container">
+          <div class="col-md-4">
+            <!--select 
+              class="form-control"
+              ng-options="sp as sp.company_name for sp in shipping_plan"
+              name="shipping_id"
+              ng-model="item"
+              ng-change="shipping_update(item);"></select-->
+          </div>
+        </div>
+        <div class="container">
+          
+          <div class="col-md-8 col-xs-12">
+            <!--
+            <div class="col-md-12">{{shipping_time_estimate}}</div>
+            <div class="col-md-12">{{shipping_fee}}</div>
+            <form class="col-md-4">
+            <!- 身份证，暂时不需要的功能 ->
+            <div class="sr-only">身份证(可能需要):<input type="file" class="pull-right col-md-5"></div>
+            </form>
+            -->
+
+            <!-- 运递方案详情，默认下隐藏；用户不需要知道太多详情内容 -->
+            <div ng-show="plan_detail">
+              <pre>{{plan_detail}}</pre>
+            </div>
+          </div>
+        </div>
+      </div><!-- /shipping-plan -->
+
+      <div class="row">
+        <div class="pull-right col-md-2">
+          <div>{{total_price_item}}</div>
+          <div>{{tax_sale}}</div>
+          <div>{{fee_shipping}}</div>
+          <div>{{total_price_final}}(~12,345 人民币)</div>
+        </div>
+        <div class="pull-right col-md-2">
+          <div>总价格:</div>
+          <div>消费税:</div>
+          <div>运　费:</div>
+          <div>结　算:</div>
+        </div>
+      </div><!-- /report-fee -->
+
+      <div class="row">
+        <div class="pull-right col-md-2">
+          <a href="<?php echo U('/payment');?>"><button class="btn btn-primary">付款</button></a>
+        </div>
+      </div>
+
+      <footer>
+      </footer>
+    </div>
+    <script>
+      var __ROOT__ = '<?php echo __ROOT__; ?>';
+      var goods_id = '<?php echo $_GET["goods_id"] ?>';
+      var goods_quantity = '<?php echo $_GET["quantity"] ?>' || 0;
+    </script>
+    <script src="<?php echo __ROOT__; ?>/public/js/Home/Checkout/angular-index.js"></script>
+    <script src="<?php echo __ROOT__; ?>/public/js/Home/Checkout/jquery-index.js"></script>
+  </body>
+</html>

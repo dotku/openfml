@@ -1,7 +1,7 @@
 <?php
-namespace Profile\Controller;
+namespace Home\Controller;
 use Think\Controller;
-class IndexController extends Controller {
+class ProfileController extends Controller {
     public function index(){
         if(!$_SESSION['user']) {
             $this->error('请先登录', U('/Access/login'));
@@ -9,9 +9,9 @@ class IndexController extends Controller {
             $this->display();
         }
     }
-  public function order(){
-    if (!$_SESSION['user']) {
-      $this->redirect('sign_in');
+    public function order(){
+      if (!$_SESSION['user']) {
+        $this->redirect('sign_in');
+      }
     }
-  }
 }

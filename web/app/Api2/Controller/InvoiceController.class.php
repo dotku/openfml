@@ -8,10 +8,8 @@ class InvoiceController extends Controller {
 
         $inputData = json_decode($_REQUEST['input']);
 
-        if (!$_SESSION['user']) {
-            $inputData['user'] = 'guest_'.md5(time().mt_rand());
-        } else {
-            $inputData['user'] = $_SESSION['user'];
+        if (!$_SESSION['user']['username']) {
+            $inputData['user']['username'] = 'guest_'.md5(time().mt_rand());
         }
 
         echo josn_encode($inputData);

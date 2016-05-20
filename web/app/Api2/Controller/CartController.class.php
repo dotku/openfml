@@ -18,17 +18,46 @@ class CartController extends Controller {
             echo json_encode($list);
         }
     }
+
+    public function add(){
+        $model = D('cart');
+        $list = D('cart')->where($_GET)->select();
+        // var_dump($_SESSION);
+        // session_destroy();
+        if (!$_SESSION['cart']['cart_key']) {
+            $key = $this->_genCartTag(getHashKey());
+            $_SESSION['cart']['cart_key'] = $key;
+            $_SESSION['user']['username'] = 'guest_'.md5(time().mt_rand());
+        } else {
+            $key = $_SESSION['cart']['cart_key'];
+            // var_dump($key);
+        }
+        
+        $list = D('cart')->where(array('cart_key' => $key))->find();
+
+        if ($_GET['pretty']) {
+            echo json_encode($list, JSON_PRETTY_PRINT);
+        } else {
+            echo json_encode($list);
+        }
+    }
+
     public function _genCartTag($key) {
         try {
             $model = D('cart');
-            $data['cart_tag'] = $key ? $key : md5(time());
+            $data['cart_key'] = $key ? $key : md5(time().mt_rand());
+            $data['cart_key'] = 'cart_'.$data['cart_key'];
+            // 为了支持 guest，这里使用 username 而不是 user_id
+            $data['username'] = getUsername();
+            
             $model->add($data);
-            var_dump($key);
-            return $data['cart_tag'];
+            // var_dump($key);
+            return $data['cart_key'];
         } catch (\Exception $e) {
-            $this->_genCartTag(md5(time()));
+            $this->_genCartTag(md5(time().mt_rand()));
         }
     }
+
     public function get_languages(){
         $model = D('settings_languages');
         //var_dump($model->select());

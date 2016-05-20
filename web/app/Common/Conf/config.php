@@ -7,14 +7,17 @@ define('__PUB__', __ROOT__.'/public');
  */
 $config_default = array(
     // API Keys
-    'MACY_API'                => 'nhz2kxnfgtd9g7p4h2j9nj6q', // 5000 call perday
+    'MACY_API'             => 'nhz2kxnfgtd9g7p4h2j9nj6q', // 5000 call perday
     // ThinkPHP
-    'TMPL_ENGINE_TYPE'        => 'PHP',
-    'TMPL_TEMPLATE_SUFFIX'    => '.html',
+    'TMPL_ENGINE_TYPE'     => 'PHP',
+    'TMPL_TEMPLATE_SUFFIX' => '.html',
     // 'MODULE_ALLOW_LIST' => array('Home','User'),
     // 'DEFAULT_MODULE'    => 'Home',
-    'URL_CASE_INSENSITIVE'    => true, 
-    'URL_HTML_SUFFIX'         =>'',
+    // 关闭多模块访问
+    'MULTI_MODULE'         =>  false,
+    'DEFAULT_MODULE'       =>  'Home',
+    'URL_CASE_INSENSITIVE' => true, 
+    'URL_HTML_SUFFIX'      =>'',
 
     // MySQL database
     'DB_TYPE'   => 'mysql', // 数据库类型

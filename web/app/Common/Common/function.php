@@ -1,4 +1,23 @@
 <?php 
+function getHashKey(){
+    return md5(time().mt_rand());
+}
+function getUsername(){
+    if ($_SESSION['user']['username']) {
+        return $_SESSION['user']['username'];
+    } else {
+        $_SESION['user']['username'] = 'guest_'.md5(time().mt_rand);
+        return $_SESION['user']['username'];
+    }
+}
+
+function getUserid(){
+    if ($_SESSION['user']['userid']) {
+        return $_SESSION['user']['userid'];
+    } else {
+        return 0;
+    }
+}
 
 function fnmili_json_decode($requestURL, $data) {
     if ($data) {

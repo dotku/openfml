@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>范米粒</title>
+<link rel="stylesheet" type="text/css" href="<?php echo __ROOT__?>/public/css/bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __ROOT__?>/public/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __ROOT__?>/public/css/sign.css"/>
+<style>
+html, body{overflow: hidden}
+@media only screen and (min-width:769px) {
+    .form-signig {margin-top: 10%; min-width: 380px}
+}
+
+</style>
+</head>
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+    	<div class="navbar-header text-center">
+            <!--
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">触屏版导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+			</button>
+            -->
+			<a class="navbar-brand" href="#">
+            	<span class="icon-ico"></span>
+                <span class="icon-LOGO"></span>
+            </a>
+		</div>
+        <!--
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav keep-center">
+            <li><a href="#">设置</a></li>
+          </ul>
+          <ul class="navbar-right nav navbar-nav">
+          	<li><a class="nav-search" href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+            <li><input type="submit" name="signin_submit" class="btn btn-primary" value="登录"></li>
+            <li><a href="#">注册</a></li>
+          </ul>
+        </div>
+        -->
+	</div>
+</nav>
+<div class="container">
+	<form class="form-signig" method="post">
+    	<h2>用户登录</h2>
+        <div class="wrap">
+            <input type="text" 
+                class="form-control" 
+                placeholder="用户名" 
+                required autofocus=""
+                name="username">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+        </div>
+        <div class="wrap">
+            <input 
+                type="password" 
+                class="form-control" 
+                placeholder="密　码" 
+                required
+                name="password"
+                >
+            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+        </div>
+        <div class="wrap">
+        	<!--div class="checkbox">
+                <input type="checkbox" ng-checked="ret.value" />
+                <label>记住我</label>
+            </div>
+            <a href="">找回密码</a-->
+            <button onclick="this.submit()">登录</button>
+        </div>
+        <a href="register" class="register">还没有账户，马上注册</a>
+    </form>
+</div>
+<script type="text/javascript" src="<?php echo __ROOT__?>/public/js/jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src="<?php echo __ROOT__?>/public/js/bootstrap.js"></script>
+<script type="text/javascript" src="<?php echo __ROOT__?>/public/js/angular.min.js"></script>
+<script type="text/javascript" src="<?php echo __ROOT__?>/public/js/js.js"></script>
+</body>
+</html>

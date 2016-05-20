@@ -5,7 +5,7 @@
     define('DIR_SECURE_CONTENT', 'deney Access!');
     define('APP_PATH', 'app/');
     define('RUNTIME_PATH', 'runtime/');
-    define('TMPL_PATH','view/');
+    // define('TMPL_PATH','view/');
 
     define('APP_DEBUG',true);
     define('__PUBLIC__', '');
