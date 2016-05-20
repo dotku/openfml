@@ -2,15 +2,19 @@
 namespace Api2\Controller;
 use Think\Controller;
 class IndexController extends Controller {
+    
     public function _initialize(){
         $this->output = array();
     }
+
     public function index(){
         $white_list = array(
             'goods_brand',
             'goods_cate',
             'goods',
-            'user'
+            'user',
+            'shipping_plan',
+            'cart_entry'
         );
         if (in_array($_GET['table'], $white_list)) {
 
@@ -41,15 +45,14 @@ class IndexController extends Controller {
         //var_dump($_GET['table']);
         $model = D($_GET['table']);
         //var_dump($_GET['id']);
-        if ($_GET['id']) {
-            $map['id'] = intval($_GET['id']);
-            $info = $model->where($map)->find();
+        if ($_GET) {
+            $info = $model->where($_GET)->select();
             if ($info) {
-                $this->output['data'] = $info;
-                $this->output['status_code'] = 1;
+                $output['data'] = $info;
+                $output['status_code'] = 1;
             } else {
-                $this->output['data'] = 'Either null or empty.';
-                $this->output['status_code'] = -1;
+                $output['data'] = 'Either null or empty.';
+                $output['status_code'] = -1;
             }
         } else {
             $list = $model->select();

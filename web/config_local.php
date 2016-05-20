@@ -31,9 +31,10 @@ $config_local = array(
     // router
     'URL_ROUTER_ON'   => true,
     'URL_ROUTE_RULES' =>array(
-        //'api2/:table' => array('Api2/Index/index'),
-        'api2/:table/[:id\d]' => array('Api2/Index/index'),
-        'home/brand/:brandname' => array('Brand/index'),
+        // 'api2/:table' => array('Api2/Index/index'),
+        'api2/index/index/:table/[:id\d]' => array('Api2/Index/index'),
+        'home/checkout/:cart_tag' => array('Checkout/index'),
+        'home/brand/:brandname' => array('Brand/index')
         //''
     ),
 );

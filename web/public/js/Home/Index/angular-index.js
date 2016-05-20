@@ -13,16 +13,16 @@ var indexApp = angular.module('indexApp', [])
     });
 
 }]).controller('featuredCtrl',['$scope','$http',function($scope,$http){
-    $http.get(__ROOT__ + '/index.php/Api2/goods').success(function(data){
+    $http.get(__ROOT__ + '/index.php/Api2/Index/index/goods').success(function(data){
         $scope.goods = data.data;
         // console.log('featureCtrl goods', $scope.goods);
     });
-    $http.get(__ROOT__ + '/index.php/Api2/goods_cate?has_goods=1').success(function(data){
+    $http.get(__ROOT__ + '/index.php/Api2/Index/index/goods_cate?has_goods=1').success(function(data){
         $scope.goods_cate = data;
         // console.log('featureCtrl goods_cate', $scope.goods_cate);
     });
 }]).controller('cateCtrl',['$scope','$http',function($scope,$http){
-    $http.get(__ROOT__ + '/index.php/Api2/goods_cate').success(function(data){
+    $http.get(__ROOT__ + '/index.php/Api2/Index/index/goods_cate').success(function(data){
         $scope.cate = data.data;
     });
 }]).filter('filterByCate', function(){

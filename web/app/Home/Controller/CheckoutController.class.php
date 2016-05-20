@@ -2,6 +2,31 @@
 namespace Home\Controller;
 use Think\Controller;
 class CheckoutController extends Controller {
+  public function index(){
+    if (!$_GET['cart_tag']) {
+      $model_cart = D('cart');
+      $model_cart_entry = D('entry');
+      $data['cart_tag'] = md5(time());
+      $model_cart->create($data);
+      // $model_cart->add();
+      // $this->redirect('/Home/Checkout/?cart_tag='.$cart_tag);
+    }
+    /*
+    if ($_GET['goods_id']) {
+      $model_goods = D('goods');
+      $list_goods = D('goods')->where($_GET)->select();
+      $output['list_goods'] = $list_goods;
+      // var_dump($list_goods);
+      if (!$_SESSION['user']) {
+        $cart['user_id'] = 'guest_'.time();
+        $_SESSION['user']['id'] = $cart['user_id'];
+      }
+    }
+    */
+    // $this->output = $output;
+    $this->display();
+  }
+
   public function sign_in(){
     if ($_POST){
       $model_user = D('user');
