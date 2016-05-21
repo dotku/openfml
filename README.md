@@ -6,10 +6,12 @@
 
 Single, 该版本采用单模块方式来开发，适合小型电商的搭建。
 
-## 技术说明
+## 主要技术
 
 - ThinkPHP 3.2  
-- heroku  
+- Angular 1.x
+- BootStrap 3.x
+- jQuery 1.x
 
 \* 本项目支持 heroku 部署
 
