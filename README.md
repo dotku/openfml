@@ -8,8 +8,9 @@ Single, 该版本采用单模块方式来开发，适合小型电商的搭建。
 
 ## 技术说明
 
-- ThinkPHP 3.2
+- ThinkPHP 3.2  
 - heroku  
+
 \* 本项目支持 heroku 部署
 
 ## 开发进度表
