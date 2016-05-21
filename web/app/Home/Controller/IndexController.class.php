@@ -7,7 +7,10 @@ class IndexController extends Controller {
       //$this->redirect('User/sign_in');
     }
   }
-  
+  public function index(){
+    R('Corn/index');
+    $this->display();
+  }
   public function order(){
     $model_order = D('receipt_order');
     $model_entry = D('entry');

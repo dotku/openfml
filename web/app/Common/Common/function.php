@@ -1,4 +1,21 @@
 <?php 
+function getArrayByJSONURL($url){
+    $json = file_get_contents($url);
+    return json_decode($json, true);
+}
+function getCartKey(){
+    if ($_SESSION['cart']['cart_key']) {
+        return $_SESSION['cart']['cart_key'];
+    } else {
+        $data['cart_key'] = 'cart_'.getHashKey();
+        $model_cart->add($data);
+        if ($model_cart->where($data)->find()){
+            return $data['cart_key'];
+        } else {
+            var_dump('car_key created failed');
+        }
+    }
+}
 function getHashKey(){
     return md5(time().mt_rand());
 }

@@ -26,5 +26,11 @@ class ApiController extends Controller {
             echo json_encode($list_user);
     }
   }
+  public function openExchangeRates(){
+    $model = D('reference');
+    $map['name'] = 'OpenExchangeRates';
+    $info = $model->where($map)->find();
+    echo $info['value'];
+  }
 
 }

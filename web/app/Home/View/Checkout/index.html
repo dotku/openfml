@@ -10,45 +10,51 @@
     <script src="/lib/angular/angular.js"></script>
     <script src="/lib/jquery/dist/jquery.min.js"></script>
     <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <style>
+      h1 {margin-bottom: 20px}
+      h3 {margin-top: 10px; margin-bottom:0px;}
+      h3+p {margin-bottom: 10px}
+    </style>
   </head>
   <body ng-app="checkoutApp">
     <div class="container">
-      
-      <div class="clearfix">
-        <h1 class="col-md-6" style="">收银台</h1>
-        <div class="col-md-6 form-search">
-          <form class="form-inline pull-right"
-            style="display:flex; align-items: center; height: 65px">
-            <div class="input-group">
-            <input class="form-control">
-            <div class="input-group-btn">
-              <button type="submit" class="btn btn-default">搜索</button>
-            </div>
-            </div>
-          </form>
-        </div>
+
+      <?php include T('inc.header');?>
+
+      <!-- 
+      <div class="container">
+        <h2>相关产品推荐</h2>
+        <ul class="inline">
+          <li>产品1</li>...<li>产品6</li>
+        </ul>
       </div>
-      
-      <div>
-        <ol class="breadcrumb">
-          <li><a href="<?php echo U('/Home/Index')?>">首页</a></li>
-          <li class="active">收银台</li>
-        </ol>
-      </div>
-      
-      <div class="container" ng-controller="cartCtrl">
+      -->
+
+      <div class="container-fluid" ng-controller="cartCtrl">
         <h2>购物车</h2>
-        <div class="col-md-4 col-xs-12" ng-show="!goods.length">
-          <div class="thumbnail">车内无任何物品</div>
+
+        <div class="container-fluid">
+          <div class="col-md-4" ng-show="!goods.length">
+            <div class="thumbnail">车内无任何物品</div>
+          </div>
         </div>
 
-        <div class="item-block col-md-4 col-xs-12" 
-          ng-repeat="g in goods">
-          <div class="thumbnail clearfix">
-            <div><img ng-src="{{g.image_file}}" width="100%"></div>
-            <div class="container">
-              <div class="lead"><h3>{{g.goods_name | number:2}}</h3></div>
-              <div>价　格: <span>{{g.unit_price | number:2}}</span> USD</div>
+        <div class="container-fluid">
+        <div class="col-md-12 thumbnail" ng-repeat="g in goods">
+
+          <div class="col-md-3">
+            <div class="">
+              <img ng-src="{{g.image_file}}" width="100%">
+            </div>
+          </div>
+          <div class="col-md-7">
+              <div class="lead">
+                <h3>{{g.goods_name_cn}}</h3>
+                <small>{{g.goods_name}}</small>
+              </div>
+              <div>价　格: <span>{{g.unit_price | number:2}}</span> {{g.currency}}</div>
+              <div ng-show="g.tax_rate > 0">税　率: <span>{{g.tax_rate | number:2}}</span> % 
+                ({{g.tax_rate * g.unit_price / 100 | number:2}} {{g.currency}})</div>
               <div>重　量: <span>{{g.unit_weight | number:2}}</span> 磅</div>
               <div>数　量: <input 
                 name="quantity" 
@@ -58,19 +64,17 @@
                 max="100"
                 ng-model="g.quantity"
                 style="border-radius: 4px; border: 1px solid #ccc; text-align: center; max-width: 50px"
-                ng-change="updateReport($index)"></div>
+                ng-change="updateReport($index)" /></div>
               <!-- div>来　源: <select><option>1</option><option>2</option><option>3</option></select></div>
               <div>供应商: <select><option>1</option><option>2</option><option>3</option></select></div-->
-            </div>
-            <div class="pull-right">
-              <button class="btn btn-xs btn-danger" 
-                ng-click="item_remove($index)">
-                &times; 删除
-              </button>
-            </div>
           </div>
+          <div class="col-md-2 text-right">
+            <button class="btn btn-xs btn-danger" ng-click="item_remove($index)">&times; 删除</button>
+          </div>
+        
+        </div><!-- /item-list -->
         </div>
-      </div><!-- /item-list -->
+      </div>
 
       <div class="container">
         <h2>收件地址</h2>
@@ -117,12 +121,13 @@
         </div>
       </div><!-- /shipping-plan -->
 
-      <div class="row">
-        <div class="pull-right col-md-2">
+      <div class="row" ng-controller="reportCtrl">
+        <div class="pull-right col-md-2 text-right">
           <div>{{total_price_item}}</div>
-          <div>{{tax_sale}}</div>
-          <div>{{fee_shipping}}</div>
-          <div>{{total_price_final}}(~12,345 人民币)</div>
+          <div>{{total_tax_value}}</div>
+          <div>{{total_shipping_fee}}</div>
+          <div>{{total_final}}<br/>
+          (~ {{total_final_RMB}} 人民币)</div>
         </div>
         <div class="pull-right col-md-2">
           <div>总价格:</div>
@@ -138,13 +143,13 @@
         </div>
       </div>
 
-      <footer>
-      </footer>
+      <?php include T('Common/footer');?>
     </div>
     <script>
       var __ROOT__ = '<?php echo __ROOT__; ?>';
-      var goods_id = '<?php echo $_GET["goods_id"] ?>';
+      var goods_id = '<?php echo $_GET["goods_id"] ?>' || 0;
       var goods_quantity = '<?php echo $_GET["quantity"] ?>' || 0;
+      console.log(goods_id);
     </script>
     <script src="<?php echo __ROOT__; ?>/public/js/Home/Checkout/angular-index.js"></script>
     <script src="<?php echo __ROOT__; ?>/public/js/Home/Checkout/jquery-index.js"></script>

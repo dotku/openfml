@@ -11,18 +11,32 @@ class CheckoutController extends Controller {
       // $model_cart->add();
       // $this->redirect('/Home/Checkout/?cart_tag='.$cart_tag);
     }
-    /*
+    
     if ($_GET['goods_id']) {
       $model_goods = D('goods');
+      $model_cart = D('cart');
+
       $list_goods = D('goods')->where($_GET)->select();
-      $output['list_goods'] = $list_goods;
+      if ($list_goods){
+        foreach($list_goods as $key => $val) {
+          $list_goods[$key]['quantity'] = 1;
+        }
+      } else {
+        $this->error('no such goods is existed');
+
+      }
+
+      $data_cart['cart_key'] = getCartKey();
+      $data_cart['goods'] = serialize($list_goods);
+      $model_cart->where('cart_key='.$data_cart['cart_key'])->save($data_cart);
+
       // var_dump($list_goods);
       if (!$_SESSION['user']) {
         $cart['user_id'] = 'guest_'.time();
         $_SESSION['user']['id'] = $cart['user_id'];
       }
     }
-    */
+    
     // $this->output = $output;
     $this->display();
   }
