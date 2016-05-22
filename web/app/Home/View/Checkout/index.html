@@ -40,6 +40,19 @@
         </div>
 
         <div class="container-fluid">
+
+          <div class="text-right input-group">
+            <div class="input-group-addon"><span>购物车</span></div>
+            <input class="form-control" value="<?php echo $_SESSION['cart']['cart_key']?>" />
+            <div class="input-group-btn">
+              <button class="btn btn-default">复制</button>
+              <button class="btn btn-default">更名</button>
+              <button class="btn btn-default">前往</button>
+            </div>
+          </div>
+          <p>* 您可以复制黏贴您的购物车，分享给其他人（让其他人代购，或者纯粹为了分享而分享）</p>
+          <!-- / 购物车分享功能 -->
+
         <div class="col-md-12 thumbnail" ng-repeat="g in goods">
 
           <div class="col-md-3">
@@ -73,6 +86,25 @@
           </div>
         
         </div><!-- /item-list -->
+
+        <div>
+          <h2>相关产品推荐</h2>
+          <div class="input-group">
+            <input class="form-control" placeholder="查找产品快捷">
+            <div class="input-group-btn">
+              <button class="btn btn-default">搜索</button>
+            </div>
+          </div>
+          
+          <ul>
+            <li>相关产品1</li>
+            <li>相关产品1</li>
+            <li>相关产品1</li>
+            <li>相关产品1</li>
+          </ul>
+          <div style="margin: 20px auto; text-align: right">无发找到您想要相关产品？
+            <a href="<?php echo U('request')?>"><button class="btn btn-default">提交产品请求</button></a></div>
+        </div> <!-- /购物新增产品 -->
         </div>
       </div>
 
@@ -137,9 +169,9 @@
         </div>
       </div><!-- /report-fee -->
 
-      <div class="row">
-        <div class="pull-right col-md-2">
-          <a href="<?php echo U('/payment');?>"><button class="btn btn-primary">付款</button></a>
+      <div class="row" style="margin-top: 20px">
+        <div class="pull-right col-md-2 text-right">
+          <a href="<?php echo U('/payment');?>"><button class="btn btn-danger">付款</button></a>
         </div>
       </div>
 

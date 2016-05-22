@@ -7,9 +7,12 @@ function getCartKey(){
     if ($_SESSION['cart']['cart_key']) {
         return $_SESSION['cart']['cart_key'];
     } else {
+        $model_cart = D('cart');
         $data['cart_key'] = 'cart_'.getHashKey();
         $model_cart->add($data);
-        if ($model_cart->where($data)->find()){
+        $info_cart = $model_cart->where($data)->find();
+        if ($info_cart){
+            $_SESSION['cart']['cart_key'] = $info_cart['cart_key'];
             return $data['cart_key'];
         } else {
             var_dump('car_key created failed');

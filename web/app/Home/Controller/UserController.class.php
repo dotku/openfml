@@ -2,6 +2,9 @@
 namespace Home\Controller;
 use Think\Controller;
 class UserController extends Controller {
+  public function index(){
+    var_dump(I('path.2'));
+  }
   public function sign_in(){
     if ($_POST){
       $model_user = D('user');

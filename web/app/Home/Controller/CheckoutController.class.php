@@ -28,7 +28,8 @@ class CheckoutController extends Controller {
 
       $data_cart['cart_key'] = getCartKey();
       $data_cart['goods'] = serialize($list_goods);
-      $model_cart->where('cart_key='.$data_cart['cart_key'])->save($data_cart);
+      $map_cart['cart_key'] = $data_cart['cart_key'];
+      $model_cart->where($map_cart)->save($data_cart);
 
       // var_dump($list_goods);
       if (!$_SESSION['user']) {

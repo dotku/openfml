@@ -2,6 +2,7 @@
 namespace Home\Controller;
 use Think\Controller;
 class ApiController extends Controller {
+
   public function username(){
     $model_user = D('user');
     $list_user = $model_user->field('username')->select();
@@ -25,6 +26,20 @@ class ApiController extends Controller {
         default:
             echo json_encode($list_user);
     }
+  }
+  public function cart(){
+    $model = D('cart');
+    $map['cart_key'] = getCartKey();
+    $info = $model->where($map)->find();
+    $output['data'] = unserialize($info['goods']);
+    if ($output['data']){
+        $output['msg'] = 'get the goods successfully.';
+        $output['code'] = 0;
+    } else {
+        $output['msg'] = 'either nothing in the cart or retrieve goods failed';
+        $output['code'] = 1;
+    }
+    echo json_encode($output);
   }
   public function openExchangeRates(){
     $model = D('reference');
