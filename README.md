@@ -68,8 +68,8 @@ single 分支目录结构主要更改如下
 1. 测试
 1. 发布  
 
-~~目前只有 master 分支，直到 1.0 版本发布后，将以 dev 和 master 分离方式来开发。~~
-目前有 master 和 single 分支，以 single 为开发版本为主，master 是旧版本（非发布版），目前本项目无发布版。
+~~目前只有 master 分支，直到 1.0 版本发布后，将以 dev 和 master 分离方式来开发。~~  
+目前有 dev\_old 和 single 分支，以 single 为开发版本为主，dev\_old 是旧版本，目前本项目无发布版。
 
 \* 参与方式  
 
