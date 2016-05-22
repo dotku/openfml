@@ -6,7 +6,7 @@
 
 Single，为加速开发，创建的衍生版本，该版本采用单模块极简的方式来开发，适用于小型电商的搭建。
 
-\* 备注: 切换版本命令 `git checkout -b single`
+\* 备注: 切换版本命令 `git checkout single`
 
 ## 主要技术
 
