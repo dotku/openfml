@@ -1,18 +1,52 @@
 <?php 
+function in_array_multi($needle, $haystack){
+    // var_dump($haystack);
+    if (is_string($needle)){
+        $needle = trim($needle);
+    }
+    if (is_array($haystack) && is_array($needle)){
+        
+        try {
+            if (!array_diff($haystack, $needle)){
+                return True;
+            }
+        } catch (\Exception $e){
+            var_dump($e);
+        }
+
+    }
+    if(!is_array($haystack))
+        return False;
+
+    foreach($haystack as $key=>$value){
+        if(is_array($value)){
+            if(in_array_multi($needle, $value))
+                return True;
+            else
+               in_array_multi($needle, $value);
+        } else if(is_string($needle) && trim($value) === trim($needle)){//visibility fix//
+            var_dump('string check');
+            error_log("$value === $needle setting visibility to 1 hidden");
+            return True;
+        }
+    }
+
+    return False;
+}
 function getArrayByJSONURL($url){
     $json = file_get_contents($url);
     return json_decode($json, true);
 }
 function getCartKey(){
-    if ($_SESSION['cart']['cart_key']) {
-        return $_SESSION['cart']['cart_key'];
+    if (cookie('cart_key')) {
+        return cookie('cart_key');
     } else {
         $model_cart = D('cart');
         $data['cart_key'] = 'cart_'.getHashKey();
         $model_cart->add($data);
         $info_cart = $model_cart->where($data)->find();
         if ($info_cart){
-            $_SESSION['cart']['cart_key'] = $info_cart['cart_key'];
+            cookie('cart_key', $info_cart['cart_key']);
             return $data['cart_key'];
         } else {
             var_dump('car_key created failed');

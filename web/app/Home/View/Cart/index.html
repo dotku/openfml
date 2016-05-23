@@ -16,18 +16,73 @@
       <?php include T('inc.header') ?>
 
       <div ng-controller="cartCtrl">
+        <div class="input-group">
+          <input class="form-control" value="<?php echo '//'.$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI]; ?>">
+          <div class="input-group-btn">
+            <button class="btn btn-default"><a href="<?php echo U('cart/fork') ?>">Fork</a></button>
+            <button class="btn btn-default">复制</button>
+            <button class="btn btn-default help">帮助</button>
+          </div>
+        </div>
+        <div class="collapse hint alert alert-info"
+        style="margin-top: 10px">* 您可以通过 Fork 
+        来创建属于你自己的购物车分支，可以通过"复制"来获取本购物车的链接，<!--
+        -->这样您就可以分享或收藏购物车信息了。</div>
+        <div class="item-list" style="margin-top: 20px">
+          <div class="col-md-12 thumbnail" ng-repeat="g in goods">
+
+            <div class="col-md-3">
+              <div class="">
+                <img ng-src="{{g.image_file}}" width="100%">
+              </div>
+            </div>
+            <div class="col-md-7">
+                <div class="lead">
+                  <h3>{{g.goods_name_cn}}</h3>
+                  <small>{{g.goods_name}}</small>
+                </div>
+                <div>价　格: <span>{{g.unit_price | number:2}}</span> {{g.currency}}</div>
+                <div ng-show="g.tax_rate > 0">税　率: <span>{{g.tax_rate | number:2}}</span> % 
+                  ({{g.tax_rate * g.unit_price / 100 | number:2}} {{g.currency}})</div>
+                <div>重　量: <span>{{g.unit_weight | number:2}}</span> 磅</div>
+                <div>数　量: <input 
+                  name="quantity" 
+                  value="1" 
+                  size="4"
+                  type="number"
+                  max="100"
+                  ng-model="g.quantity"
+                  style="border-radius: 4px; border: 1px solid #ccc; text-align: center; max-width: 50px"
+                  ng-change="updateReport($index)" /></div>
+                <!-- div>来　源: <select><option>1</option><option>2</option><option>3</option></select></div>
+                <div>供应商: <select><option>1</option><option>2</option><option>3</option></select></div-->
+            </div>
+            <div class="col-md-2 text-right">
+              <button class="btn btn-xs btn-danger" ng-click="item_remove($index)">&times; 删除</button>
+            </div>
+          
+          </div><!-- /item-list -->
+        </div>
       </div>
 
       <?php include T('inc.pagination') ?>
       <?php include T('Common/footer') ?>
     </div>
     <script>
+      $(".help").click(function(){
+        $(".hint").fadeIn();
+        console.log($(".hint").text());
+        setTimeout(function(){
+          $(".hint").fadeOut();
+        }, 5000);
+      })
       var indexApp = angular.module('cartApp', [])
       .controller('cartCtrl', ['$rootScope', '$scope','$http',function($rootScope, $scope, $http){
         console.log('cartCtrl');
         $http.get('<?php echo U("/api/cart")?>')
         .then(function(rsp){
           console.log(rsp);
+          $scope.goods = rsp.data.data;
         });
       }]);
     </script>

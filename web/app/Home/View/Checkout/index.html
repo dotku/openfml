@@ -71,10 +71,10 @@
               <div>重　量: <span>{{g.unit_weight | number:2}}</span> 磅</div>
               <div>数　量: <input 
                 name="quantity" 
-                value="1" 
                 size="4"
                 type="number"
                 max="100"
+                value="{{g.quantity}}"
                 ng-model="g.quantity"
                 style="border-radius: 4px; border: 1px solid #ccc; text-align: center; max-width: 50px"
                 ng-change="updateReport($index)" /></div>
@@ -87,24 +87,24 @@
         
         </div><!-- /item-list -->
 
-        <div>
-          <h2>相关产品推荐</h2>
-          <div class="input-group">
-            <input class="form-control" placeholder="查找产品快捷">
-            <div class="input-group-btn">
-              <button class="btn btn-default">搜索</button>
+          <div class="hide">
+            <h2>相关产品推荐</h2>
+            <div class="input-group">
+              <input class="form-control" placeholder="查找产品快捷">
+              <div class="input-group-btn">
+                <button class="btn btn-default">搜索</button>
+              </div>
             </div>
-          </div>
-          
-          <ul>
-            <li>相关产品1</li>
-            <li>相关产品1</li>
-            <li>相关产品1</li>
-            <li>相关产品1</li>
-          </ul>
-          <div style="margin: 20px auto; text-align: right">无发找到您想要相关产品？
-            <a href="<?php echo U('request')?>"><button class="btn btn-default">提交产品请求</button></a></div>
-        </div> <!-- /购物新增产品 -->
+            
+            <ul>
+              <li>相关产品1</li>
+              <li>相关产品1</li>
+              <li>相关产品1</li>
+              <li>相关产品1</li>
+            </ul>
+            <div style="margin: 20px auto; text-align: right">无发找到您想要相关产品？
+              <a href="<?php echo U('request')?>"><button class="btn btn-default">提交产品请求</button></a></div>
+          </div> <!-- /购物新增产品 -->
         </div>
       </div>
 
@@ -169,10 +169,18 @@
         </div>
       </div><!-- /report-fee -->
 
-      <div class="row" style="margin-top: 20px">
-        <div class="pull-right col-md-2 text-right">
-          <a href="<?php echo U('/payment');?>"><button class="btn btn-danger">付款</button></a>
+      <!--div class="row">
+        <div class="pull-right col-md-2">
+          <a href="<?php echo U('/payment');?>"><button class="btn btn-primary">付款</button></a>
         </div>
+      </div-->
+      <div class="container-fluid">
+        <nav>
+          <ul class="pager">
+            <li class="previous"><a href="<?php echo U('/cart')?>">购物车</a></li>
+            <li class="next"><a href="<?php echo U('/payment')?>">付款</a></li>
+          </ul>
+        </nav>
       </div>
 
       <?php include T('Common/footer');?>

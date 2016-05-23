@@ -1,6 +1,6 @@
 var indexApp = angular.module('checkoutApp', [])
 .controller('cartCtrl', ['$rootScope', '$scope','$http',function($rootScope, $scope, $http){
-    $scope.total_price_item = 0;
+    // $scope.total_price_item = 0;
     console.log('checkoutAPP is running');
     console.log('goods_id', goods_id);
     // console.log('goods_quantity', goods_quantity);
@@ -9,7 +9,7 @@ var indexApp = angular.module('checkoutApp', [])
     if (goods_id){
         httpRequst = $http.get(__ROOT__ + '/index.php/Api2/Index/index/goods?goods_id=' + goods_id);
     } else {
-        httpRequst = $http.get(__ROOT__ + '/index.php/Api2/Index/index/goods');
+        httpRequst = $http.get(__ROOT__ + '/index.php/Api/cart');
     }
 
     httpRequst.then(function(rsp){
@@ -18,8 +18,8 @@ var indexApp = angular.module('checkoutApp', [])
             $rootScope.goods = $scope.goods = rsp.data.data;
             
             for (var i = 0; i < $scope.goods.length; i++) {
-                if (goods_quantity > 0) {
-                    $scope.goods_quantity_update(i, goods_quantity);
+                if ($scope.goods[i].quantity > 0) {
+                    $scope.goods_quantity_update(i, $scope.goods[i].quantity);
                 } else {
                     $scope.goods_quantity_update(i, 1);
                 }
@@ -45,12 +45,6 @@ var indexApp = angular.module('checkoutApp', [])
         $rootScope.goods[index].quantity = num;
         $rootScope.total_price_item += $rootScope.goods[index].unit_price * num;
         // $scope.goods = $rootScope.goods;
-        /*
-          <div>{{total_price_item}}</div>
-          <div>{{tax_sale}}</div>
-          <div>{{fee_shipping}}</div>
-          <div>{{total_price_final}}(~12,345 人民币)</div>
-        */
     }
     
     $scope.updateReport = function(index){
@@ -58,12 +52,13 @@ var indexApp = angular.module('checkoutApp', [])
         $rootScope.total_price_item = 0;
         $rootScope.total_tax_value = 0;
         for (var i = 0; i < $scope.goods.length; i ++) {
-            $rootScope.total_price_item += Math.round($scope.goods[i].unit_price * $scope.goods[i].quantity * 100)/100;
+            $rootScope.total_price_item += $scope.goods[i].unit_price * $scope.goods[i].quantity;
             if ($scope.goods[i].tax_rate > 0) {
                 $rootScope.total_tax_value += Math.round($scope.goods[i].unit_price * $scope.goods[i].tax_rate)/100;
             }
             console.log('$rootScope.total_price_item', $rootScope.total_price_item);
         }
+        $rootScope.total_price_item = Math.round($rootScope.total_price_item * 100)/100;
         $rootScope.total_final = $rootScope.total_price_item 
             + $rootScope.total_shipping_fee
             + $rootScope.total_tax_value;

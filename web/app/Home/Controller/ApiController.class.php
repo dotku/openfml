@@ -30,6 +30,7 @@ class ApiController extends Controller {
   public function cart(){
     $model = D('cart');
     $map['cart_key'] = getCartKey();
+    // var_dump(cookie('cart_key'));
     $info = $model->where($map)->find();
     $output['data'] = unserialize($info['goods']);
     if ($output['data']){

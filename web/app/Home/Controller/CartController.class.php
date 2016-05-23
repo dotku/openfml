@@ -5,7 +5,20 @@ class CartController extends Controller {
   public function index(){
     $model_cart = D('cart');
     $model_goods = D('goods');
-    $map_cart['cart_key'] = $_SESSION['cart']['cart_key'];
+    $map_cart['cart_key'] = getCartKey();
+
+    // 导向 
+
+    if (I('path.2')){
+      cookie('cart_key', I('path.2'));
+      $map_cart['cart_key'] = getCartKey();
+    }
+    // var_dump(I('path.2') != $map_cart['cart_key']);
+    if (I('path.2') != $map_cart['cart_key']) {
+      var_dump($map_cart['cart_key']);
+      // redirect('/cart/index/' + $map_cart['cart_key']);
+      $this->redirect('/Cart/index/'.$map_cart['cart_key']);
+    }
 
     // 创建 购物车
     $info_cart = $model_cart->where($map_cart)->find();
@@ -14,26 +27,34 @@ class CartController extends Controller {
     }
 
     // 添加物品
+    // var_dump($_REQUEST['goods_id']);
     if ($_REQUEST['goods_id']) {
       $map_goods['goods_id'] = $_REQUEST['goods_id'];
       $info_goods = $model_goods->where($map_goods)->find();
       $info_cart = $model_cart->where($map_cart)->find();
       $cart_goods = unserialize($info_cart['goods']);
 
-      if ($cart_goods && is_array($cart_goods)) {
-        $is_found = true;
-        foreach($cart_goods as $key => $val){
-          if ($val)
+      // var_dump((!empty($cart_goods) && is_array($cart_goods)));
+      if (!empty($cart_goods) && is_array($cart_goods)) {
+        foreach ($cart_goods as $key => $value) {
+          if ($value['goods_id'] == $_REQUEST['goods_id']){
+            $cart_goods[$key]['quantity'] ++;
+            $is_found = true;
+            break;
+          } else {
+            $is_found = false;
+          }
         }
-        if (!$is_found){
+        // var_dump('expression');
+        // var_dump(!$is_found && !empty($info_goods));
+        if (!$is_found && $info_goods){
           // var_dump('not in the cart');
-          array_push($info_goods, $cart_goods);
+          array_push($cart_goods, $info_goods);
           // var_dump($cart_goods);
-        } else {
-          // var_dump('found the item in the cart');
-          $key = array_search($info_goods, $cart_goods);
-          $cart_goods[$key]['quantity']++;
+          // var_dump($info_goods);
+          // var_dump(array_push($info_goods, $cart_goods));
         }
+
       } else {
           $cart_goods = array();
           array_push($cart_goods, $info_goods);
@@ -44,6 +65,21 @@ class CartController extends Controller {
     }
 
     $this->display();
+  }
+  public function fork(){
+    $model_cart = D('cart');
+    var_dump(cookie('cart_key'));
+    $map_cart['cart_key'] = cookie('cart_key');
+
+    $data = $model_cart->where($map_cart)->find();
+    unset($data['cart_id']);
+    cookie('cart_key', null);
+    $map_cart['cart_key'] = $data['cart_key'] = getCartKey();
+    var_dump($data);
+    $model_cart->where($map_cart)->save($data);
+    
+    var_dump(getCartKey());
+    $this->redirect('/Cart/index/'.$map_cart['cart_key']);
   }
   public function sign_in(){
     if ($_POST){

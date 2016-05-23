@@ -83,6 +83,9 @@
           <input class="form-control" placeholder="区县乡街道地址" name="address_street">
           <input class="form-control" placeholder="邮编" name="zipcode">
         </div>
+        <div class="hide">
+          <p>注册成为会员，享受地址簿功能</p>
+        </div>
       </div><!-- /address -->
 
       <div class="container" ng-controller="shippingCtrl">
@@ -119,7 +122,7 @@
 
       <div class="row">
         <div class="pull-right col-md-2">
-          <div>{{total_price_item}}</div>
+          <div>{{total_price_item | number:2}}</div>
           <div>{{tax_sale}}</div>
           <div>{{fee_shipping}}</div>
           <div>{{total_price_final}}(~12,345 人民币)</div>
@@ -132,12 +135,19 @@
         </div>
       </div><!-- /report-fee -->
 
-      <div class="row">
+      <!--div class="row">
         <div class="pull-right col-md-2">
           <a href="<?php echo U('/payment');?>"><button class="btn btn-primary">付款</button></a>
         </div>
+      </div-->
+      <div class="container-fluid">
+        <nav>
+          <ul class="pager">
+            <li class="prev"><a href="<?php echo U('/cart')?>">付款</a></li>
+            <li class="next"><a href="<?php echo U('/payment')?>">付款</a></li>
+          </ul>
+        </nav>
       </div>
-
       <footer>
       </footer>
     </div>
