@@ -82,7 +82,7 @@
         $http.get('<?php echo U("/api/cart")?>')
         .then(function(rsp){
           console.log(rsp);
-          $scope.goods = rsp.data.data;
+          $scope.goods = rsp.data.value;
         });
       }]);
     </script>

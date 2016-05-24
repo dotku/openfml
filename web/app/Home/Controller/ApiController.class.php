@@ -32,8 +32,8 @@ class ApiController extends Controller {
     $map['cart_key'] = getCartKey();
     // var_dump(cookie('cart_key'));
     $info = $model->where($map)->find();
-    $output['data'] = unserialize($info['goods']);
-    if ($output['data']){
+    $output['value'] = unserialize($info['goods']);
+    if ($output['value']){
         $output['msg'] = 'get the goods successfully.';
         $output['code'] = 0;
     } else {
@@ -47,6 +47,26 @@ class ApiController extends Controller {
     $map['name'] = 'OpenExchangeRates';
     $info = $model->where($map)->find();
     echo $info['value'];
+  }
+  /**
+  * 腾讯地图数据，每 1 个月更新一次
+  */
+  public function qqmap_ws_district(){
+    $url  = 'http://apis.map.qq.com/ws/district/v1/list?key=AGLBZ-MBBRP-D2FDZ-LGW3P-SR6MK-FBB24';
+
+    if ($_GET['id']){
+        $url = 'http://apis.map.qq.com/ws/district/v1/getchildren?key=AGLBZ-MBBRP-D2FDZ-LGW3P-SR6MK-FBB24&'.http_build_query($_GET);
+    }
+    $geo_key = md5($url);
+    if (!S('geo_'.$geo_key)){
+        $data = file_get_contents($url);
+        S('geo_'.$geo_key, $data, 3600*24*30);
+        echo($data);
+    } else {
+        echo S('geo_'.$geo_key);
+    }
+    //var_dump($url);
+    
   }
 
 }

@@ -71,7 +71,30 @@ var indexApp = angular.module('checkoutApp', [])
     }
     
 }])
+.controller('receiverCtrl', ['$scope', '$http', function($scope, $http){
+    /*
+    $scope.level1 = [{fullname: "北京市"}];
+    $scope.level2 = [{fullname: "北京市"}];
+    $scope.level3 = [{fullname: "东城区"}];
+    $scope.selectedLevel1 = $scope.level1[0];
+    $scope.selectedLevel2 = $scope.level2[0];
+    $scope.selectedLevel3 = $scope.level3[0];
+    */
+    $http.get(__ROOT__ + '/index.php/api/qqmap_ws_district')
+    .then(function(rsp){
 
+        console.log('addressCtrl', rsp.data);
+        $scope.level1 = rsp.data.result[0];
+        $scope.level2 = rsp.data.result[1];
+        $scope.level3 = rsp.data.result[2];
+
+        console.log('$scope.level1', $scope.level1);
+        console.log('$scope.level2', $scope.level2);
+        console.log('$scope.level3', $scope.level3);
+
+        $scope.selectedLevel1 = $scope.level1[0];
+    });
+}])
 .controller('shippingCtrl', ['$scope','$http',function($scope, $http){
     $http.get(__ROOT__ + '/index.php/Api2/Index/index/shipping_plan')
     .then(function(rsp){

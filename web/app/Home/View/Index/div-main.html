@@ -1,26 +1,30 @@
-<div ng-controller="featuredCtrl">
+<div ng-controller="featuredCtrl" class="container-fluid">
+  <h2>Featured <small>推荐产品</small></h2>
   <div ng-repeat="gc in goods_cate">
-    <h2 ng-bind="gc.display"></h2>
+    <h3 ng-bind="gc.display"></h3>
     <div class="row"> 
       <div class="col-xs-6 col-md-3" 
         ng-repeat="g in goods | orderBy:'id' | filter: {cate_id: gc.id} | limitTo: 4"> 
-        <a href="<?php echo U('/Home/product/detail'); ?>?id={{g.id}}" class="thumbnail"> 
-          <img ng-src="{{g.image_file}}" 
-            style="height: 180px; width: 100%; display: block;"> 
-        </a>
-        <div class="caption">
-          <div style="height: 160px">
-            <h3 class="lead" style="font-size: 16px; min-height: 44px; margin-bottom: 10px">{{g.goods_name_cn}}</h3>
-            <p>{{g.goods_name}}</p>
+        
+        <div class="thumbnail">
+          <a href="<?php echo U('/Home/product/detail'); ?>?id={{g.id}}"> 
+            <img ng-src="{{g.image_file}}" 
+              style="height: 180px; width: 100%; display: block;"> 
+          </a>
+          
+          <div class="caption">
+            <div style="height: 140px">
+              <h3 class="lead" style="font-size: 16px; min-height: 44px; margin-bottom: 10px">{{g.goods_name_cn}}</h3>
+              <p>{{g.goods_name}}</p>
+            </div>
+            <p>
+              <a href="<?php echo U('/cart')?>?goods_id={{g.goods_id}}"><button class="btn btn-primary" role="button">购买</button></a>
+              <a href="#"><button class="btn btn-default" role="button">加入购物车</button></a>
+            </p>
           </div>
-          <p>
-            <a href="<?php echo U('/checkout')?>?goods_id={{g.goods_id}}"><button class="btn btn-primary" role="button">购买</button></a>
-            <a href="#"><button class="btn btn-default" role="button">加入购物车</button></a>
-          </p>
         </div>
+
       </div>
     </div>
   </div>
 </div>
-<script>
-</script>

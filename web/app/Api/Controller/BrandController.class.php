@@ -11,8 +11,8 @@ class BrandController extends Controller {
     * $options
     */
     public function index(){
-        $this->item = I('path.1');
-        //var_dump($item);
+        $this->item = I('path.3');
+        //var_dump($this->item);
         
         switch ($_SERVER['REQUEST_METHOD']) {
             case 'POST':

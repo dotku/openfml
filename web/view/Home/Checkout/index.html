@@ -72,7 +72,7 @@
         </div>
       </div><!-- /item-list -->
 
-      <div class="container">
+      <div class="container" ng-controller="receiverCtrl">
         <h2>收件地址</h2>
         <div class="col-md-8">
           <input class="form-control" placeholder="收件人">
@@ -92,12 +92,12 @@
         <h2>运递方案</h2>
         <div class="container">
           <div class="col-md-4">
-            <!--select 
+            <select 
               class="form-control"
               ng-options="sp as sp.company_name for sp in shipping_plan"
               name="shipping_id"
               ng-model="item"
-              ng-change="shipping_update(item);"></select-->
+              ng-change="shipping_update(item);"></select>
           </div>
         </div>
         <div class="container">

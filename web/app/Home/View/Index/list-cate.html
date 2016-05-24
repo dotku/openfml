@@ -1,5 +1,5 @@
-<div class="list-cate" ng-controller="cateCtrl">
-	<h2>Category 分类</h2>
+<div class="list-cate container-fluid" ng-controller="cateCtrl">
+  <h2>Category <small>分类</small></h2>
 	<div class="col-xs-6 col-md-2" ng-repeat="x in cate | orderBy:'id':true">
       	<a href="../product" class="thumbnail"> <img ng-src="{{x.image_file}}" style="height: 80px; width: 100%; display: block;"> </a>
 	</div>

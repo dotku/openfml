@@ -42,11 +42,13 @@ class IndexController extends Controller {
     }
 
     public function _default(){
-        //var_dump($_GET['table']);
+        // var_dump($_GET['table']);
         $model = D($_GET['table']);
-        //var_dump($_GET['id']);
-        if ($_GET) {
-            $info = $model->where($_GET)->select();
+        $indexs = $model->query('SHOW INDEXES FROM '.$_GET['table']);
+        $primary_index = $indexs[0]['column_name'];
+        if ($_GET['id']) {
+            $map_table[$primary_index] = $_GET['id'];
+            $info = $model->where($_GET['id'])->select();
             if ($info) {
                 $output['data'] = $info;
                 $output['status_code'] = 1;

@@ -108,15 +108,28 @@
         </div>
       </div>
 
-      <div class="container">
+      <div class="container" ng-controller="receiverCtrl">
         <h2>收件地址</h2>
         <div class="col-md-8">
           <input class="form-control" placeholder="收件人">
           <input class="form-control" placeholder="联系方式 (手机 或 固定电话)">
           <input class="form-control" value="中国 (现仅面向中国)" readonly>
-          <input class="form-control" placeholder="省份直辖市, eg 福建省" name="area_level_1">
-          <input class="form-control" placeholder="城市市, eg 福州市" name="area_level_2">
-          <input class="form-control" placeholder="区县乡街道地址" name="address_street">
+          
+          <select class="form-control" 
+            name="area_level_1"
+            ng-model="selectedLevel1" 
+            ng-options="lv1.fullname for lv1 in level1"></select>
+          
+          <select class="form-control" 
+            name="area_level_2"
+            ng-model="selectedLevel2" 
+            ng-options="lv2.fullname for lv2 in level2"></select>
+
+          <select class="form-control" 
+            name="area_level_3"
+            ng-model="selectedLevel3" 
+            ng-options="lv3.fullname for lv3 in level3"></select>
+            
           <input class="form-control" placeholder="邮编" name="zipcode">
         </div>
       </div><!-- /address -->

@@ -1,12 +1,19 @@
 var indexApp = angular.module('indexApp', [])
+.controller('headerCtrl', ['$scope','$http',function($scope, $http){
+    $http.get(__ROOT__ + '/index.php/api/cart')
+    .then(function(rsp){
+        console.log('headerCtrl rsp', rsp);
+        $scope.cart = rsp.data.value;
+    });
+}])
 .controller('brandCtrl', ['$scope','$http',function($scope, $http){
    // console.log('brandAPP is running');
-    $http.get(__ROOT__ + '/index.php/Api/brand')
+    $http.get(__ROOT__ + '/index.php/Api/Brand/index')
     .then(function(rsp){
         if (rsp.data && rsp.data.list){
             $scope.brand = rsp.data.list;
         }
-        console.log($scope.brand);
+        // console.log($scope.brand);
     }, function(rsp){
         // console.log('brandApp request failed');
         // console.log(rsp);
@@ -23,7 +30,13 @@ var indexApp = angular.module('indexApp', [])
     });
 }]).controller('cateCtrl',['$scope','$http',function($scope,$http){
     $http.get(__ROOT__ + '/index.php/Api2/Index/index/goods_cate').success(function(data){
-        $scope.cate = data.data;
+        if (data.status_code > 0){
+            $scope.cate = data.data;
+        } else {
+            $scope.cate = [];
+            console.log(data);
+        }
+        
     });
 }]).filter('filterByCate', function(){
     return function(goods, gc_id){
