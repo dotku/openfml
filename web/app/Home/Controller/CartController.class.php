@@ -7,30 +7,12 @@ class CartController extends Controller {
     $model_goods = D('goods');
     $map_cart['cart_key'] = getCartKey();
 
-    // 导向 
-
-    if (I('path.2')){
-      cookie('cart_key', I('path.2'));
-      $map_cart['cart_key'] = getCartKey();
-    }
-    // var_dump(I('path.2') != $map_cart['cart_key']);
-    if (I('path.2') != $map_cart['cart_key']) {
-      var_dump($map_cart['cart_key']);
-      // redirect('/cart/index/' + $map_cart['cart_key']);
-      $this->redirect('/Cart/index/'.$map_cart['cart_key']);
-    }
-
-    // 创建 购物车
-    $info_cart = $model_cart->where($map_cart)->find();
-    if (!$info_cart) {
-      $model_cart->add($map_cart);
-    }
-
     // 添加物品
     // var_dump($_REQUEST['goods_id']);
     if ($_REQUEST['goods_id']) {
       $map_goods['goods_id'] = $_REQUEST['goods_id'];
       $info_goods = $model_goods->where($map_goods)->find();
+      $info_goods['quantity']++;
       $info_cart = $model_cart->where($map_cart)->find();
       $cart_goods = unserialize($info_cart['goods']);
 
@@ -59,10 +41,30 @@ class CartController extends Controller {
           $cart_goods = array();
           array_push($cart_goods, $info_goods);
       }
-
       $info_cart['goods'] = serialize($cart_goods);
       $model_cart->save($info_cart);
     }
+
+    // 导向 
+
+    if (I('path.2')){
+      cookie('cart_key', I('path.2'));
+      $map_cart['cart_key'] = getCartKey();
+    }
+    // var_dump(I('path.2') != $map_cart['cart_key']);
+    if (I('path.2') != $map_cart['cart_key']) {
+      var_dump($map_cart['cart_key']);
+      // redirect('/cart/index/' + $map_cart['cart_key']);
+      $this->redirect('/Cart/index/'.$map_cart['cart_key']);
+    }
+
+    // 创建 购物车
+    $info_cart = $model_cart->where($map_cart)->find();
+    if (!$info_cart) {
+      $model_cart->add($map_cart);
+    }
+
+    
 
     $this->display();
   }

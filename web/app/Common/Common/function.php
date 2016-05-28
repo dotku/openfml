@@ -1,4 +1,9 @@
 <?php 
+function rest_getRequestVars(){
+
+    $content = file_get_contents('php://input');
+    return json_decode($content, true);
+}
 function in_array_multi($needle, $haystack){
     // var_dump($haystack);
     if (is_string($needle)){
@@ -11,7 +16,7 @@ function in_array_multi($needle, $haystack){
                 return True;
             }
         } catch (\Exception $e){
-            var_dump($e);
+            var_dump('Exception', $e);
         }
 
     }
