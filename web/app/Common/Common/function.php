@@ -42,6 +42,12 @@ function getArrayByJSONURL($url){
     $json = file_get_contents($url);
     return json_decode($json, true);
 }
+
+/**
+ * getCartKey
+ * 此函数将废弃使用
+ */
+
 function getCartKey(){
     if (cookie('cart_key')) {
         return cookie('cart_key');

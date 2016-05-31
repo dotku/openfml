@@ -1,0 +1,34 @@
+<div class="">
+        <h2>他人的购物车</h2>
+        <?php foreach($output['list_cart'] as $val) { ?>
+          <?php $list_goods = unserialize($val['goods']); ?>
+          <?php if (is_array($list_goods) && !empty($list_goods)) {?>
+          <div class="container-fluid thumbnail">
+            <?php var_dump($val); 
+              $val['username'] ? $username = $val['username'] : $username = 'guest';
+            ?>
+            <input class="form-control" value="<?php echo '/' 
+              . $val['user_id'] 
+              . '/' . $username 
+              . '/' . $val['cart_key'] ?>">
+            
+            
+
+            <?php foreach($list_goods as $val_goods) {?>
+              <?php // var_dump($val_goods) ?>
+              <div class="col-md-3">
+                <div><img src="<?php echo $val_goods['image_file'] ?>" 
+                style="width:100%"></div>
+                <div class="text-center">
+                  <?php echo $val_goods['goods_name_cn'] ?>
+                  (<?php echo number_format($val_goods['unit_price'], 2, '.', ''); ?>) 
+                  x <?php echo $val_goods['quantity'] ?>
+                  = <?php echo $val_goods['quantity'] * number_format($val_goods['unit_price'], 2, '.', '') ?>
+                </div>
+              </div>
+            <?php } ?>
+            
+          </div>
+          <?php } ?>
+        <?php } ?>
+      </div>

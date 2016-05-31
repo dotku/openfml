@@ -1,4 +1,17 @@
 <?php
+/**
+ * 购物车
+ * 
+ * 1. 购物车有分为两种，一种公有的，一种私有的
+ * 2. 每个人可以拥有多辆的购物车
+ * 3. 默认下访问的是用户最近使用的购物车
+ * 4. 游客的购物车可以被访问
+ * 每个人所拥有的购物车应该是独一无二的
+ * 通过 /cart/user/username/cart_key 来访问个人的购物车
+ * ** 注意，购物车在 Common/function 中还有在使用，之后将废弃，通过 
+ * R("Cart/getCartKey") 来实现
+ * 
+ */ 
 namespace Home\Controller;
 use Think\Controller;
 class CartController extends Controller {
@@ -66,8 +79,9 @@ class CartController extends Controller {
 
     
 
-    $this->display();
+    $this->display('index');
   }
+
   public function fork(){
     $model_cart = D('cart');
     var_dump(cookie('cart_key'));
@@ -83,32 +97,68 @@ class CartController extends Controller {
     var_dump(getCartKey());
     $this->redirect('/Cart/index/'.$map_cart['cart_key']);
   }
-  public function sign_in(){
-    if ($_POST){
-      $model_user = D('user');
-      $map_user['username'] = $_POST['username'];
-      $map_user['password'] = md5($_POST['password']);
-      $info_user = $model_user->where($map_user)->find();
-      if ($info_user) {
-        unset($info_user['password']);
-        $_SESSION['user'] = $info_user;
-        $this->redirect('Index/order');
+
+
+  public function getCartKey(){
+    if ($_GET['cart_key']) {
+      $model_cart = D('cart');
+      $map_cart['cart_key'] = $_GET['cart_key'];
+      if ($model_cart->where($map_cart)->find()) {
+        cookie('cart_key', $_GET['cart_key']);
       } else {
-        // var_dump($_POST);
-        // var_dump($info_user);
-        $this->error('登陆失败');
+        $data['cart_key'] = 'cart_'.getHashKey();
+        $model_cart->add($data);
+        cookie('cart_key', $data['cart_key']);
       }
-    } else{
-      $this->display();
+      return $_GET['cart_key'];
+    }
+
+    if (cookie('cart_key')) {
+        return cookie('cart_key');
+    } else {
+        $model_cart = D('cart');
+        $data['cart_key'] = 'cart_'.getHashKey();
+        $model_cart->add($data);
+        $info_cart = $model_cart->where($data)->find();
+        if ($info_cart){
+            cookie('cart_key', $info_cart['cart_key']);
+            return $data['cart_key'];
+        } else {
+            var_dump('car_key created failed');
+        }
     }
   }
-
-  public function logout(){
-    session_destroy();
-    $this->redirect('/index/sign_in');
+  public function user(){
+    var_dump($_SESSION);
+    var_dump($_GET);
+    /* grab the current user's cart
+    if ($_GET['username'] != $_SESSION['user']['username']) {
+      $this->redirect('/cart/user/'
+        .$_SESSION['user']['username']
+        ."/"
+        .$_GET['cart_key']);
+    }
+    */
   }
-
-  public function profile(){
-    $this->error('页面制作中，请稍后回来...');
+  public function detail(){
+    //var_dump($_GET);
+    $map['cart_key'] = array('neq', $_GET['cart_key']);
+    $map['goods'] = array('neq', '');
+    $this->get_cart_list(4, $map);
+    $this->index();
+  }
+  public function cart_list(){
+    $this->get_cart_list();
+    $this->display();
+  }
+  public function get_cart_list($limit = 100, $map = array()){
+    $model_cart = D('cart');
+    $list_cart = $model_cart
+      ->order('cart_id desc')
+      ->where($map)
+      ->limit($limit)
+      ->select();
+    $output['list_cart'] = $list_cart;
+    $this->output = $output;
   }
 }

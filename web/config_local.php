@@ -3,7 +3,7 @@
 * 由于服务器环境，开发环境，各有不同，本文件用于本地环境的配置搭建；
 * 本文件将会被 /index.php 和 /Common/Conf/config.php 文件同时引用
 */
-
+// require_once 'config_router.php';
 $config_local = array(
     // SITE
     'site_title'    => '范米粒',
@@ -29,14 +29,17 @@ $config_local = array(
     'DB_PORT'   => 3306, // 端口
     'DB_CHARSET'=> 'utf8', // 字符集
 
-    // router
     'URL_ROUTER_ON'   => true,
     'URL_ROUTE_RULES' =>array(
         // 'api2/:table' => array('Api2/Index/index'),
-        'api2/index/index/:table/[:id\d]' => array('Api2/Index/index'),
-        'api/brand' => array('Api/Brand/index'),
-        'home/checkout/:cart_tag' => array('Checkout/index'),
-        'home/brand/:brandname' => array('Brand/index')
-        //''
-    ),
+        'api2/index/index/:table/[:id\d]'   => array('Api2/Index/index'),
+        'api/brand'                         => array('Api/Brand/index'),
+        'cart/detail/:cart_key'             => array('Cart/detail'),
+        'cart/list'                         => array('Cart/cart_list'),
+        'cart/user/[:username]/[:cart_key]' => array('Cart/user'),
+        'home/checkout/:cart_tag'           => array('Checkout/index'),
+        'home/brand/:brandname'             => array('Brand/index')
+    )
 );
+
+// $config_local = array_merge($config_local, $config_router);

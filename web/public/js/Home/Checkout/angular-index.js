@@ -34,7 +34,7 @@ var indexApp = angular.module('checkoutApp', [])
     });
 
     $scope.item_remove = function(index) {
-        if (confirm('删除购物车物品')){
+        if (confirm('删除购物车物品')) {
             $scope.goods.splice(index, 1);
             console.log('cartCtrl', $scope.goods);
         }

@@ -82,9 +82,13 @@ class ApiController extends Controller {
             $this->_cart_post();
             $output = $this->output;
             break;
+        case 'delete':
+            $this->_cart_delete();
+            break;
         default:
             // the default would be _cart_get();
     }
+
     $this->_cart_get();
   }
 
@@ -112,7 +116,7 @@ class ApiController extends Controller {
     $model_cart = D('cart');
     $postdata = file_get_contents("php://input");
     $request = json_decode($postdata, true);
-
+    // var_dump($_POST);
     $map_goods['goods_id'] = $request['goods_id'];
     
     // var_dump($request);
@@ -149,10 +153,22 @@ class ApiController extends Controller {
     }
   }
 
-  public function _cart_put(){
+  public function _cart_delete(){
     $this->output = $putdata = fopen("php://input", "r");
-    var_dump($putdata);
+    var_dump(file_put_contents($putdata));
   }
+
+  public function _cart_put(){
+
+    // parse_str(,$putVars);
+    // $str = file_get_contents("php://input");
+    var_dump(
+        '_cart_put', 
+        file_get_contents("php://input"), 
+        json_decode($str, true)
+    );
+  }
+
 
   public function openExchangeRates(){
     $model = D('reference');

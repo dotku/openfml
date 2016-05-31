@@ -1,0 +1,12 @@
+<div class="input-group">
+          <input class="form-control" value="<?php echo '//'.$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI]; ?>">
+          <div class="input-group-btn">
+            <button class="btn btn-default"><a href="<?php echo U('cart/fork') ?>">Fork</a></button>
+            <button class="btn btn-default">复制</button>
+            <button class="btn btn-default help">帮助</button>
+          </div>
+        </div>
+        <div class="collapse hint alert alert-info"
+        style="margin-top: 10px">* 您可以通过 Fork 
+        来创建属于你自己的购物车分支，可以通过"复制"来获取本购物车的链接，<!--
+        -->这样您就可以分享或收藏购物车信息了。</div>

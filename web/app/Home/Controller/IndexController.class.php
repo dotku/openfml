@@ -8,8 +8,22 @@ class IndexController extends Controller {
     }
   }
   public function index(){
-    R('Corn/index');
+    // var_dump($_GET['cart_key']);
+    /*
+    if (!$_GET['cart_key'] || (!$_GET['username'] && $_SESSION['user'])) {
+        
+      if ($_SESSION['user']){
+        $target['username'] = $_SESSION['user']['username'];
+      }
+      $target['cart_key'] = cookie('cart_key');
+
+      //$this->redirect('?'.http_build_query($target));
+    }
+    */
     $this->display();
+    R('Corn/index');
+    R('Cart/getCartKey');
+    var_dump(cookie('cart_key'));
   }
   public function order(){
     $model_order = D('receipt_order');
